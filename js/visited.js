@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Retrieve the current visit count from local storage
 var visitCount = localStorage.getItem("visitCount");
 
@@ -74,7 +73,6 @@ document.getElementById("vues").value = visitCount;
 //     margin-right: 0 auto;
 //   }
 // }
-=======
 // Retrieve the current visit count from local storage
 var visitCount = localStorage.getItem("visitCount");
 
@@ -92,4 +90,3 @@ localStorage.setItem("visitCount", visitCount);
 
 // Output the visit count to the console or display it on your portfolio
 console.log("Number of visits: " + visitCount);
->>>>>>> d2f1e5e02a79d26231082864801eaf85738ea326
