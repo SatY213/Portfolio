@@ -35,6 +35,7 @@ function handleColorSwitchChange(event) {
     });
     btn.style.color = "rgb(22, 21, 21)";
     btn.style.boxShadow = "0 0 2px 0.5px rgb(167, 202, 233)";
+    document.getElementById('vues').style.color = "rgb(22, 21, 21)";
   } else {
     // Unchecked state styles
     body.style.color = "aliceblue";
@@ -58,6 +59,8 @@ function handleColorSwitchChange(event) {
     });
     btn.style.color = "aliceblue";
     btn.style.boxShadow = "0 0 2px 0.5px rgba(231, 230, 227, 0.8)";
+        document.getElementById('vues').style.color = "aliceblue";
+
   }
 }
 
