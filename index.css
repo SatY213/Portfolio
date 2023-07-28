@@ -1,0 +1,373 @@
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: rgb(22, 21, 21);
+  color: aliceblue;
+  font-size: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth color change */
+}
+input {
+  outline: none;
+}
+
+.welcome {
+  text-align: center;
+}
+.heartbeat {
+  display: inline-block;
+  margin-bottom: 2cm;
+  font-size: 14px;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.slider {
+  height: 250px;
+  margin: auto;
+  position: relative;
+  width: 90%;
+  box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.8);
+  display: grid;
+  border-radius: 20%;
+
+  place-items: center;
+  overflow: hidden;
+}
+
+.slide-track {
+  display: flex;
+  animation: scroll 10s linear infinite;
+}
+
+.slide-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 8));
+  }
+}
+
+.slide {
+  height: 200px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  perspective: 100px;
+}
+
+img {
+  width: 70%;
+  transition: transform 1s;
+}
+
+img:hover {
+  transform: translateZ(20px);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  justify-content: space-between;
+}
+
+.form-check {
+  margin-right: 10px;
+}
+
+.languageSelector {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.languageSelector label {
+  margin-right: 5px;
+}
+
+.languageSelector select {
+  border: none;
+  padding: 5px;
+  color: aliceblue;
+  background-color: rgba(102, 51, 153, 0);
+}
+
+/* Style for the questions container */
+#questions-container {
+  padding: 20px;
+  margin-top: 100px;
+}
+
+/* Style for the question items */
+.question {
+  cursor: pointer;
+  padding: 10px;
+
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0.5px rgba(255, 255, 255, 0.8);
+
+  transition: background-color 0.3s ease;
+}
+
+.question:hover {
+  background-color: #eaeaea3f;
+}
+
+/* Style for the answer section */
+.answer {
+  margin: 20px;
+  margin-top: 120px;
+  border-radius: 5px;
+}
+.photodemoi {
+  position: absolute;
+  box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.477);
+  border-radius: 50%;
+  margin-left: 10cm;
+  left: 200px;
+  border: none;
+  top: 4px;
+}
+.photodemoi img {
+  width: 4cm;
+  height: 4cm;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.col-md-6 {
+  padding: 10px;
+}
+
+.test {
+  border: 1px solid aliceblue;
+  box-shadow: 0 0 2px 0.5px rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  margin-top: 100px;
+}
+
+/* Additional styles for responsiveness */
+
+#contactFormWrapper {
+  position: absolute;
+  top: 90%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  margin-top: 220px;
+  border-radius: 10px;
+  color: aliceblue;
+  background-color: #2b2b2bf5;
+  box-shadow: 0 0 2px 0.5px rgba(231, 230, 227, 0.8);
+  width: 30%;
+  display: none;
+}
+
+.contact-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: rgb(39, 39, 39);
+  color: aliceblue;
+}
+
+button[type="submit"] {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 2px 0.5px rgba(231, 230, 227, 0.8);
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #f0f0f06a;
+  color: aliceblue;
+}
+
+#toggleFormBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #5d5d5d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 3cm;
+  margin-top: 12cm;
+}
+
+#contactFormWrapper {
+  display: none;
+}
+
+.music {
+  position: fixed;
+  bottom: 400px;
+  right: 10px;
+  z-index: 9999;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 12cm;
+}
+
+@media (max-width: 767px) {
+  /* Mobile devices and small screens */
+  body {
+    font-size: 13px;
+  }
+  .question {
+    font-size: 13px;
+  }
+  .header-container {
+    margin-top: auto;
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add an ellipsis (...) to indicate truncated text if necessary */
+    font-size: 12px;
+    height: 100px; /* Adjust the height as needed */
+  }
+  .form-check {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .languageSelector {
+    margin-right: 0;
+    display: inline;
+  }
+
+  .languageSelector select {
+    width: 100%;
+  }
+
+  /* Adjust the slider height for better visibility on small screens */
+  .slider {
+    height: 150px;
+    margin: auto;
+    position: relative;
+    width: 90%;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.8);
+    display: grid;
+    border-radius: 20%;
+    place-items: center;
+    overflow: hidden;
+    color: rgba(181, 216, 247, 0.874);
+  }
+  img {
+    width: 40%;
+    margin-bottom: 50px;
+    transition: transform 1s;
+  }
+
+  .photodemoi {
+    /* Adjust the position of the photo demoi for better visibility on small screens */
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    top: 20px;
+    width: 3cm;
+    height: 3cm;
+    margin-left: 1px;
+  }
+  .photodemoi img {
+    width: 3cm;
+    height: 3cm;
+  }
+  .test {
+    /* Make the .test section full width on small screens */
+    width: 100%;
+  }
+
+  /* Show the contact form and adjust its width for small screens */
+  #contactFormWrapper {
+    /* Instead of using transform, position it directly */
+    position: absolute;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #2b2b2bf5;
+    color: aliceblue;
+    box-shadow: 0 0 2px 0.5px rgba(231, 230, 227, 0.8);
+    z-index: 9999;
+    width: 90%; /* Adjust the width to be slightly smaller */
+    max-width: 400px; /* Add a maximum width to avoid excessive width on larger screens */
+    display: none;
+    top: 50%;
+    left: 50%;
+  }
+
+  #toggleFormBtn {
+    position: fixed;
+    top: 39px;
+    right: 10px;
+    z-index: 9999;
+    font-size: 16px;
+    background-color: #5d5d5d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 3cm;
+  }
+  .music {
+    font-size: 10px;
+    bottom: 440px;
+  }
+  .fa-music {
+    font-size: 12px;
+  }
+}
