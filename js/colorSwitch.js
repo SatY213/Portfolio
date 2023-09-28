@@ -4,7 +4,7 @@ function handleColorSwitchChange(event) {
   const slider = document.querySelector(".slider");
   const languageSelector = document.querySelector(".languageSelect");
   const questions = document.querySelectorAll(".question");
-  const photoDemoi = document.getElementById("photodemoi");
+  // const photoDemoi = document.getElementById("photodemoi");
   const test = document.querySelector(".test");
   const contactForm = document.getElementById("contactFormWrapper");
   const isChecked = event.target.checked;
@@ -20,7 +20,7 @@ function handleColorSwitchChange(event) {
     questions.forEach(function (question) {
       question.style.boxShadow = "0 0 2px 0.5px rgb(167, 202, 233)";
     });
-    photoDemoi.style.boxShadow = "0 0 10px rgb(167, 202, 233)";
+    // photoDemoi.style.boxShadow = "0 0 10px rgb(167, 202, 233)";
     slider.style.boxShadow = "0 0 20px 10px rgb(167, 202, 233)";
     test.style.boxShadow = "0 0 2px 0.5px rgb(167, 202, 233)";
     test.style.border = "1px solid rgb(167, 202, 233);";
@@ -35,7 +35,7 @@ function handleColorSwitchChange(event) {
     });
     btn.style.color = "rgb(22, 21, 21)";
     btn.style.boxShadow = "0 0 2px 0.5px rgb(167, 202, 233)";
-    document.getElementById('vues').style.color = "rgb(22, 21, 21)";
+    document.getElementById("vues").style.color = "rgb(22, 21, 21)";
   } else {
     // Unchecked state styles
     body.style.color = "aliceblue";
@@ -43,7 +43,7 @@ function handleColorSwitchChange(event) {
     questions.forEach(function (question) {
       question.style.boxShadow = "0 0 2px 0.5px rgba(255, 255, 255, 0.8)";
     });
-    photoDemoi.style.boxShadow = "0px 0px 10px 0px rgba(255, 255, 255, 0.477)";
+    // photoDemoi.style.boxShadow = "0px 0px 10px 0px rgba(255, 255, 255, 0.477)";
     slider.style.boxShadow = "0 0 20px 2px rgba(255, 255, 255, 0.8)";
     body.style.backgroundColor = "rgb(22, 21, 21)";
     test.style.boxShadow = "0 0 2px 0.5px rgba(255, 255, 255, 0.8)";
@@ -59,8 +59,7 @@ function handleColorSwitchChange(event) {
     });
     btn.style.color = "aliceblue";
     btn.style.boxShadow = "0 0 2px 0.5px rgba(231, 230, 227, 0.8)";
-        document.getElementById('vues').style.color = "aliceblue";
-
+    document.getElementById("vues").style.color = "aliceblue";
   }
 }
 
@@ -68,4 +67,3 @@ function handleColorSwitchChange(event) {
 document
   .getElementById("colorSwitch")
   .addEventListener("change", handleColorSwitchChange);
-

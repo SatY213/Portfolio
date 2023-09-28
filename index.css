@@ -8,6 +8,8 @@ body {
   line-height: 1.6;
   background: rgb(22, 21, 21);
   color: aliceblue;
+  padding: 20px;
+
   font-size: 15px;
   transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth color change */
 }
@@ -44,7 +46,6 @@ input {
   box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.8);
   display: grid;
   border-radius: 20%;
-
   place-items: center;
   overflow: hidden;
 }
@@ -75,7 +76,6 @@ input {
   padding: 15px;
   perspective: 100px;
 }
-
 img {
   width: 70%;
   transition: transform 1s;
@@ -87,8 +87,6 @@ img:hover {
 
 .header-container {
   display: flex;
-  align-items: center;
-  margin: 20px;
   justify-content: space-between;
 }
 
@@ -141,21 +139,22 @@ img:hover {
   margin-top: 120px;
   border-radius: 5px;
 }
-.photodemoi {
-  position: absolute;
-  box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.477);
-  border-radius: 50%;
-  margin-left: 13cm;
-  left: 200px;
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .photodemoi {
+  position: relative;
   border: none;
-  top: 4px;
 }
 .photodemoi img {
   width: 4cm;
   height: 4cm;
-  object-fit: cover;
   border-radius: 50%;
-}
+  object-fit: cover;
+} */
 .col-md-6 {
   padding: 10px;
 }
@@ -266,6 +265,7 @@ button[type="submit"]:hover {
 
 @media (max-width: 767px) {
   /* Mobile devices and small screens */
+
   body {
     font-size: 13px;
   }
@@ -278,6 +278,7 @@ button[type="submit"]:hover {
     overflow: hidden; /* Hide overflowing text */
     text-overflow: ellipsis; /* Add an ellipsis (...) to indicate truncated text if necessary */
     font-size: 12px;
+
     height: 100px; /* Adjust the height as needed */
   }
   .form-check {
@@ -297,9 +298,9 @@ button[type="submit"]:hover {
   /* Adjust the slider height for better visibility on small screens */
   .slider {
     height: 150px;
-    margin: auto;
     position: relative;
     width: 90%;
+    margin-top: 50px;
     box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.8);
     display: grid;
     border-radius: 20%;
@@ -314,18 +315,11 @@ button[type="submit"]:hover {
   }
 
   .photodemoi {
-    /* Adjust the position of the photo demoi for better visibility on small screens */
-    left: 50%;
-    transform: translateX(-50%);
-    position: relative;
-    top: 20px;
-    width: 3cm;
-    height: 3cm;
-    margin-left: 1px;
   }
   .photodemoi img {
     width: 3cm;
     height: 3cm;
+    object-fit: cover;
   }
   .test {
     /* Make the .test section full width on small screens */
@@ -370,11 +364,10 @@ button[type="submit"]:hover {
   .fa-music {
     font-size: 12px;
   }
+  #paragraph1 {
+    margin-left: 10px;
+  }
+  #containername {
+    margin-left: 10px;
+  }
 }
-
-
-
- 
-
-  
-
