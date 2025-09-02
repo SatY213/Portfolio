@@ -1,0 +1,182 @@
+<style>
+  .window {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 0;
+  }
+  .contact-item {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+  .contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left-color: #4299e1;
+  }
+  .social-icon {
+    transition: transform 0.3s ease;
+  }
+  .social-icon:hover {
+    transform: scale(1.2);
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>
+
+<div
+  class="w-full max-w-2xl h-auto bg-gray-800 rounded-lg overflow-hidden shadow-2xl window"
+>
+  <!-- Title bar -->
+  <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <img src="./images/ContactIcon.png" alt="" style="width: 20px" />
+      <span class="text-white text-sm">Contact Information</span>
+    </div>
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_contact"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_contact"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_contact"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <div class="p-6 h-auto overflow-auto bg-gray-900 text-gray-200">
+    <h2
+      class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 flex items-center"
+    >
+      <i class="fas fa-user-circle mr-3 text-blue-400"></i> Contact Details
+    </h2>
+
+    <!-- Contact information -->
+    <div class="space-y-4 mb-8">
+      <!-- Name -->
+      <div class="contact-item flex items-center p-3 rounded">
+        <div
+          class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-4"
+        >
+          <i class="fas fa-user text-white"></i>
+        </div>
+        <div>
+          <div class="text-sm text-gray-400">Name</div>
+          <div class="text-white">Abdelhakim Merini</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item flex items-center p-3 rounded">
+        <div
+          class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center mr-4"
+        >
+          <i class="fas fa-envelope text-white"></i>
+        </div>
+        <div>
+          <div class="text-sm text-gray-400">Email</div>
+          <div class="text-white">abdelhakimerini@gmail.com</div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-item flex items-center p-3 rounded">
+        <div
+          class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mr-4"
+        >
+          <i class="fas fa-phone text-white"></i>
+        </div>
+        <div>
+          <div class="text-sm text-gray-400">Phone</div>
+          <div class="text-white">+213 542 09 18 97</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social media -->
+    <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+      <i class="fas fa-share-alt mr-2 text-blue-400"></i> Social Media
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- LinkedIn -->
+      <a
+        href="#"
+        class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center mb-2"
+        >
+          <i class="fab fa-linkedin-in text-white text-xl"></i>
+        </div>
+        <span class="text-white">LinkedIn</span>
+        <span class="text-xs text-gray-400 mt-1">/abdelhakim-merini</span>
+      </a>
+
+      <!-- GitHub -->
+      <a
+        href="#"
+        class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-gray-700 flex items-center justify-center mb-2"
+        >
+          <i class="fab fa-github text-white text-xl"></i>
+        </div>
+        <span class="text-white">GitHub</span>
+        <span class="text-xs text-gray-400 mt-1">@Saty213</span>
+      </a>
+
+      <!-- Instagram -->
+      <a
+        href="#"
+        class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-pink-600 flex items-center justify-center mb-2"
+        >
+          <i class="fab fa-instagram text-white text-xl"></i>
+        </div>
+        <span class="text-white">Instagram</span>
+        <span class="text-xs text-gray-400 mt-1">hakimerini</span>
+      </a>
+    </div>
+
+    <!-- Quick action -->
+    <div class="flex justify-center pt-4 border-t border-gray-700">
+      <button
+        class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded flex items-center"
+      >
+        <i class="fas fa-paper-plane mr-2"></i> Send Message
+      </button>
+    </div>
+  </div>
+</div>
+
+<script></script>
