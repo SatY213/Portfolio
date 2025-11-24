@@ -1,0 +1,415 @@
+
+    <style> 
+      .contact-item {
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+      }
+
+      .contact-item:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-left-color: #4299e1;
+      }
+
+      .social-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .social-icon:hover {
+        transform: scale(1.2);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Title bar styles */
+      .title-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: #4a5568;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .title-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .title-icon {
+        width: 20px;
+        height: 20px;
+        background-color: #e53e3e;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title-text {
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .control-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cbd5e0;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .control-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .control-btn.close:hover {
+        background-color: #e53e3e;
+      }
+
+      /* PDF Viewer Styles */
+      .pdf-container {
+        height: calc(100% - 48px);
+        background-color: #1a202c;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .pdf-toolbar {
+        display: flex;
+        align-items: center;
+        padding: 10px 16px;
+        background-color: #2d3748;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        gap: 15px;
+      }
+
+      .toolbar-btn {
+        background: none;
+        border: none;
+        color: #cbd5e0;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .toolbar-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .zoom-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+      }
+
+      .zoom-value {
+        color: #cbd5e0;
+        font-size: 14px;
+        min-width: 50px;
+        text-align: center;
+      }
+
+      .pdf-content {
+        flex: 1;
+        overflow: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    max-height: calc(100vh - 100px);
+      }
+
+      .pdf-page {
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        background-color: white;
+        position: relative;
+      }
+
+      .pdf-page canvas {
+        display: block;
+      }
+
+      .textLayer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        opacity: 0.2;
+        line-height: 1;
+      }
+
+      .textLayer > span {
+        color: transparent;
+        position: absolute;
+        white-space: pre;
+        cursor: text;
+        transform-origin: 0% 0%;
+      }
+
+      .loading {
+        color: #cbd5e0;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 15px;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #4299e1;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .page-info {
+        color: #cbd5e0;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <div>
+    <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <img src="./images/pdfIcon.png" alt="" style="width: 20px" />
+      <span class="text-white text-sm">PDF Viewer - Resume</span>
+    </div>
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_resume"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_resume"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_resume"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+      <!-- PDF Container -->
+      <div class="pdf-container">
+        <div class="pdf-toolbar">
+          <button class="toolbar-btn" id="prev_page">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+          </button>
+          <button class="toolbar-btn" id="next_page">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="zoom-controls">
+            <button class="toolbar-btn" id="zoom_out">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <span class="zoom-value" id="zoom_value">100%</span>
+            <button class="toolbar-btn" id="zoom_in">
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="pdf-content overflow-auto" id="pdf_pages">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading PDF document...</p>
+          </div>
+        </div>
+      </div>
+</div>
+<script>
+  const pdfUrl = "./images/resume.pdf";
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+// PDF state variables
+let pdfDoc = null;
+let currentPage = 1;
+let currentScale = 1.0;
+
+// DOM Elements
+const pagesContainer = document.getElementById("pdf_pages");
+const zoomValue = document.getElementById("zoom_value");
+const prevPageBtn = document.getElementById("prev_page");
+const nextPageBtn = document.getElementById("next_page");
+const zoomInBtn = document.getElementById("zoom_in");
+const zoomOutBtn = document.getElementById("zoom_out");
+
+// Load PDF document
+pdfjsLib
+  .getDocument(pdfUrl)
+  .promise.then((pdf) => {
+    pdfDoc = pdf;
+    renderPage(currentPage);
+    updatePageControls();
+  })
+  .catch((error) => {
+    console.error("Error loading PDF:", error);
+    pagesContainer.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 40px; color: #e53e3e;"></i>
+                    <p>Failed to load PDF document</p>
+                    <p style="font-size: 14px; margin-top: 10px;">${error.message}</p>
+                </div>
+            `;
+  });
+
+// Render a single page
+function renderPage(pageNum) {
+  pagesContainer.innerHTML =
+    '<div class="loading"><div class="spinner"></div><p>Rendering page...</p></div>';
+
+  pdfDoc.getPage(pageNum).then((page) => {
+    const viewport = page.getViewport({ scale: currentScale });
+
+    // Create page wrapper
+    const pageDiv = document.createElement("div");
+    pageDiv.className = "pdf-page";
+    pageDiv.style.width = viewport.width + "px";
+    pageDiv.style.height = viewport.height + "px";
+
+    // Create canvas
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    // Append canvas to page wrapper
+    pageDiv.appendChild(canvas);
+
+    // Clear container and add page
+    pagesContainer.innerHTML = "";
+    pagesContainer.appendChild(pageDiv);
+
+    // Add page info
+    const pageInfo = document.createElement("div");
+    pageInfo.className = "page-info";
+    pageInfo.textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+    pagesContainer.appendChild(pageInfo);
+
+    // Render PDF page
+    page.render({
+      canvasContext: ctx,
+      viewport: viewport,
+    });
+
+    // Create text layer for selectable text
+    page.getTextContent().then((textContent) => {
+      const textLayerDiv = document.createElement("div");
+      textLayerDiv.className = "textLayer";
+      pageDiv.appendChild(textLayerDiv);
+
+      pdfjsLib.renderTextLayer({
+        textContent: textContent,
+        container: textLayerDiv,
+        viewport: viewport,
+        textDivs: [],
+      });
+    });
+  });
+}
+
+// Update page navigation controls
+function updatePageControls() {
+  prevPageBtn.disabled = currentPage <= 1;
+  nextPageBtn.disabled = currentPage >= pdfDoc.numPages;
+}
+
+// Zoom controls
+zoomInBtn.addEventListener("click", () => {
+  currentScale = Math.min(currentScale + 0.1, 3.0);
+  zoomValue.textContent = Math.round(currentScale * 100) + "%";
+  renderPage(currentPage);
+});
+
+zoomOutBtn.addEventListener("click", () => {
+  currentScale = Math.max(currentScale - 0.1, 0.5);
+  zoomValue.textContent = Math.round(currentScale * 100) + "%";
+  renderPage(currentPage);
+});
+
+// Page navigation
+prevPageBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPage(currentPage);
+    updatePageControls();
+  }
+});
+
+nextPageBtn.addEventListener("click", () => {
+  if (currentPage < pdfDoc.numPages) {
+    currentPage++;
+    renderPage(currentPage);
+    updatePageControls();
+  }
+});
+
+// Initial zoom value
+zoomValue.textContent = Math.round(currentScale * 100) + "%";
+
+</script>
+  </div>

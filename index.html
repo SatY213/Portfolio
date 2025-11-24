@@ -3,32 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio - Windows 11 Style</title>
+    <title>Abdelhakim's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap");
-
       body {
         font-family: "Segoe UI", sans-serif;
-
+      }
+      #background {
         background-image: url("images/background.jpg");
         background-repeat: no-repeat; /* Prevent tiling */
         background-position: center; /* Center horizontally & vertically */
         background-size: cover;
         overflow: hidden;
+        height: calc(100vh - 56px);
+        position: absolute;
+        width: 100%;
       }
 
       .window {
         transition: transform 0.2s, box-shadow 0.2s;
-      }
-
-      .window:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
       }
 
       .taskbar-icon:hover {
@@ -60,84 +63,98 @@
       .window {
         position: absolute;
       }
-      #contact_card {
+      #contact_card,
+      #resume_card,
+      #browser_card {
         position: absolute;
         top: 100px; /* initial position */
         left: 100px;
         width: 600px; /* set a default width */
-        height: auto; /* content will define height */
-        z-index: 1000; /* make sure it’s above desktop */
+        height: calc(100% - 56px);
         cursor: grab;
+      }
+      .window {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: absolute;
+        top: 0;
       }
     </style>
   </head>
   <body class="h-screen flex flex-col text-white bg-gray-900">
-    <!-- Desktop Content -->
-    <div class="flex-1 overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12">
-      <!-- Projects Folder -->
-      <div class="folder text-center cursor-pointer">
-        <div
-          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-        >
-          <img src="./images/RecycleBin.png" alt="" />
+    <div class="background" id="background">
+      <!-- Desktop Content -->
+      <div class="overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12">
+        <!-- Projects Folder -->
+        <div class="folder text-center cursor-pointer">
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+            onclick='alert("This feature is currently being developed and will be available soon.")'
+          >
+            <img src="./images/RecycleBin.png" alt="" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Recycle Bin</p>
         </div>
-        <p class="mt-2 text-sm font-medium">Recycle Bin</p>
-      </div>
-      <!--  -->
-      <div
-        class="folder text-center cursor-pointer transition-transform duration-300"
-      >
+        <!--  -->
         <div
-          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          class="folder text-center cursor-pointer transition-transform duration-300"
+          onclick='alert("This feature is currently being developed and will be available soon.")'
         >
-          <img src="./images/FolderIcon.png" alt="" />
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Projects</p>
         </div>
-        <p class="mt-2 text-sm font-medium">Projects</p>
+
+        <!-- Other Desktop Icons -->
+        <div class="folder text-center cursor-pointer">
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/infoIcon.png" alt="" />
+          </div>
+          <p class="mt-2 text-sm font-medium">About Me</p>
+        </div>
+
+        <div class="folder text-center cursor-pointer" id="contact_icon">
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/ContactIcon.png" alt="" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Contact</p>
+        </div>
+
+        <div class="folder text-center cursor-pointer" id="resume_icon">
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/pdfIcon.png" alt="" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Resume</p>
+        </div>
       </div>
 
-      <!-- Other Desktop Icons -->
-      <div class="folder text-center cursor-pointer">
-        <div
-          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-        >
-          <img src="./images/infoIcon.png" alt="" />
-        </div>
-        <p class="mt-2 text-sm font-medium">About Me</p>
-      </div>
-
-      <div class="folder text-center cursor-pointer" id="contact_icon">
-        <div
-          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-        >
-          <img src="./images/ContactIcon.png" alt="" />
-        </div>
-        <p class="mt-2 text-sm font-medium">Contact</p>
-      </div>
-
-      <div class="folder text-center cursor-pointer">
-        <div
-          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-        >
-          <img src="./images/pdfIcon.png" alt="" />
-        </div>
-        <p class="mt-2 text-sm font-medium">Resume</p>
-      </div>
+      <!-- Windows -->
+      <div class="contact_card hidden" id="contact_card"></div>
+      <div class="resume_card hidden" id="resume_card"></div>
+      <div class="browser_card hidden" id="browser_card"></div>
     </div>
-
-    <!-- Windows -->
-    <div class="contact_card" id="contact_card"></div>
-
     <!-- Taskbar -->
     <div
-      class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between px-4"
+      class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between px-4 absolute bottom-0 left-0 right-0"
     >
       <div class="flex items-center space-x-4">
         <div
+          onclick='alert("This feature is currently being developed and will be available soon.")'
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <i class="fab fa-windows text-blue-400 text-[24px]"></i>
         </div>
         <div
+          onclick='alert("This feature is currently being developed and will be available soon.")'
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <i class="fas fa-search text-gray-300"></i>
@@ -146,6 +163,7 @@
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <div
+            onclick='alert("This feature is currently being developed and will be available soon.")'
             class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
           >
             <img src="./images/FolderIcon.png" alt="" />
@@ -161,6 +179,7 @@
         >
           <div
             class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="browser_icon"
           >
             <img src="./images/browserIcon.png" alt="" />
           </div>
@@ -168,8 +187,8 @@
       </div>
 
       <div class="flex items-center space-x-2 flex-col">
-        <div class="text-xs text-gray-300">10:24 AM</div>
-        <div class="text-xs text-gray-300">9/2/2025</div>
+        <div id="live-time" class="text-xs text-gray-300"></div>
+        <div id="live-date" class="text-xs text-gray-300"></div>
       </div>
     </div>
 
@@ -178,17 +197,74 @@
 
       const card_icon = document.getElementById("contact_icon");
       const card_container = document.getElementById("contact_card");
+      const resume_container = document.getElementById("resume_card");
+      const resume_icon = document.getElementById("resume_icon");
+      const browser_container = document.getElementById("browser_card");
+      const browser_icon = document.getElementById("browser_icon");
+
+      resume_icon.addEventListener("dblclick", async () => {
+        resume_container.style.display = "block";
+        if (!resume_container.innerHTML) {
+          // use resume_container here
+          // load once
+          const response = await fetch("./folders/resume.html");
+
+          const html = await response.text();
+
+          resume_container.innerHTML = html;
+
+          // Find all scripts inside fetched HTML
+          resume_container.querySelectorAll("script").forEach((oldScript) => {
+            const newScript = document.createElement("script");
+            if (oldScript.src) {
+              newScript.src = oldScript.src; // external script
+            } else {
+              newScript.textContent = oldScript.textContent; // inline script
+            }
+            document.body.appendChild(newScript); // append to execute
+          });
+        }
+      });
+
+      browser_icon.addEventListener("click", async () => {
+        browser_container.style.display = "block";
+        if (!browser_container.innerHTML) {
+          // use browser_container here
+          // load once
+          const response = await fetch("./folders/browser.html");
+
+          const html = await response.text();
+
+          browser_container.innerHTML = html;
+
+          // Find all scripts inside fetched HTML
+          browser_container.querySelectorAll("script").forEach((oldScript) => {
+            const newScript = document.createElement("script");
+            if (oldScript.src) {
+              newScript.src = oldScript.src; // external script
+            } else {
+              newScript.textContent = oldScript.textContent; // inline script
+            }
+            document.body.appendChild(newScript); // append to execute
+          });
+        }
+      });
 
       card_icon.addEventListener("dblclick", async () => {
+        card_container.style.display = "block";
         if (!card_container.innerHTML) {
           // use card_container here
           // load once
-          const response = await fetch("contact.html");
+          const response = await fetch("./folders/contact.html");
           const html = await response.text();
           card_container.innerHTML = html;
         }
       });
     </script>
-    <script src="./js/contact.js"></script>
+    <script type="module" src="./js/windows/contactWindow.js"></script>
+    <script type="module" src="./js/windows/resumeWindow.js"></script>
+    <script type="module" src="./js/windows/browserWindow.js"></script>
+
+    <script src="./js/clock.js"></script>
   </body>
 </html>

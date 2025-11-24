@@ -1,0 +1,302 @@
+<style>
+  .contact-item {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left-color: #4299e1;
+  }
+
+  .social-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .browser-content {
+    background-color: white;
+  }
+
+  .browser-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: #2d3748;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 10px;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: #cbd5e0;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-btn:disabled {
+    color: #718096;
+    cursor: not-allowed;
+  }
+
+  .nav-btn:disabled:hover {
+    background-color: transparent;
+  }
+
+  .address-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #1a202c;
+    border-radius: 20px;
+    padding: 6px 12px;
+    color: #cbd5e0;
+  }
+
+  .address-bar i {
+    margin-right: 8px;
+    color: #4299e1;
+  }
+
+  .address-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+  }
+
+  .browser-frame {
+    width: 100%;
+    border: none;
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #4a5568;
+    font-size: 18px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(66, 153, 225, 0.2);
+    border-left: 4px solid #4299e1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+<div
+  class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
+>
+  <!-- Title bar -->
+  <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <div
+        class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center"
+      >
+        <i class="fas fa-globe text-white text-xs"></i>
+      </div>
+      <span class="text-white text-sm">Browser - Google</span>
+    </div>
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_browser"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_browser"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_browser"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Browser content -->
+  <div class="browser-content">
+    <!-- Browser toolbar -->
+    <div class="browser-toolbar">
+      <button class="nav-btn" id="back_btn" disabled>
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button class="nav-btn" id="forward_btn" disabled>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      <button class="nav-btn" id="refresh_btn">
+        <i class="fas fa-redo"></i>
+      </button>
+
+      <div class="address-bar">
+        <i class="fas fa-lock"></i>
+        <input
+          type="text"
+          class="address-input"
+          id="address_input"
+          value="https://www.google.com"
+          readonly
+        />
+      </div>
+
+      <button class="nav-btn" id="home_btn">
+        <i class="fas fa-home"></i>
+      </button>
+    </div>
+
+    <!-- Browser frame -->
+    <iframe
+      src="https://www.google.com/webhp?igu=1"
+      class="browser-frame h-screen max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+      id="browser_frame"
+      frameborder="0"
+    ></iframe>
+  </div>
+
+  <script>
+    // DOM Elements
+    const browserFrame = document.getElementById("browser_frame");
+    const addressInput = document.getElementById("address_input");
+    const backBtn = document.getElementById("back_btn");
+    const forwardBtn = document.getElementById("forward_btn");
+    const refreshBtn = document.getElementById("refresh_btn");
+    const homeBtn = document.getElementById("home_btn");
+
+    // Browser state
+    let history = [];
+    let currentHistoryIndex = -1;
+
+    // Initialize browser
+    function initBrowser() {
+      // Add Google to history
+      addToHistory("https://www.google.com/webhp?igu=1");
+
+      // Set up event listeners
+      refreshBtn.addEventListener("click", refreshPage);
+      homeBtn.addEventListener("click", goHome);
+      backBtn.addEventListener("click", goBack);
+      forwardBtn.addEventListener("click", goForward);
+
+      // Browser frame events
+      browserFrame.addEventListener("load", handleFrameLoad);
+    }
+
+    // Add URL to history
+    function addToHistory(url) {
+      // If we're not at the end of history, remove forward history
+      if (currentHistoryIndex < history.length - 1) {
+        history = history.slice(0, currentHistoryIndex + 1);
+      }
+
+      history.push(url);
+      currentHistoryIndex = history.length - 1;
+      updateNavButtons();
+    }
+
+    // Update navigation buttons state
+    function updateNavButtons() {
+      backBtn.disabled = currentHistoryIndex <= 0;
+      forwardBtn.disabled = currentHistoryIndex >= history.length - 1;
+    }
+
+    // Navigate back
+    function goBack() {
+      if (currentHistoryIndex > 0) {
+        currentHistoryIndex--;
+        browserFrame.src = history[currentHistoryIndex];
+        addressInput.value = history[currentHistoryIndex];
+        updateNavButtons();
+      }
+    }
+
+    // Navigate forward
+    function goForward() {
+      if (currentHistoryIndex < history.length - 1) {
+        currentHistoryIndex++;
+        browserFrame.src = history[currentHistoryIndex];
+        addressInput.value = history[currentHistoryIndex];
+        updateNavButtons();
+      }
+    }
+
+    // Refresh page
+    function refreshPage() {
+      browserFrame.src = browserFrame.src;
+    }
+
+    // Go to home page (Google)
+    function goHome() {
+      const homeUrl = "https://www.google.com/webhp?igu=1";
+      browserFrame.src = homeUrl;
+      addressInput.value = homeUrl;
+      addToHistory(homeUrl);
+    }
+
+    // Handle frame load
+    function handleFrameLoad() {
+      // Update address bar with the actual loaded URL
+      try {
+        // Note: We can't access the iframe's URL due to same-origin policy
+        // In a real browser, we would update the address bar here
+      } catch (e) {
+        // Cross-origin frame, can't access URL
+      }
+    }
+
+    initBrowser();
+  </script>
+</div>

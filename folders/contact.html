@@ -1,10 +1,4 @@
 <style>
-  .window {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: absolute;
-    top: 0;
-  }
   .contact-item {
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
@@ -35,7 +29,7 @@
 </style>
 
 <div
-  class="w-full max-w-2xl h-auto bg-gray-800 rounded-lg overflow-hidden shadow-2xl window"
+  class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
 >
   <!-- Title bar -->
   <div class="flex justify-between items-center p-3 bg-gray-700">
@@ -71,7 +65,9 @@
   </div>
 
   <!-- Content area -->
-  <div class="p-6 h-auto overflow-auto bg-gray-900 text-gray-200">
+  <div
+    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+  >
     <h2
       class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 flex items-center"
     >
@@ -127,7 +123,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <!-- LinkedIn -->
       <a
-        href="#"
+        href="https://www.linkedin.com/in/abdelhakim-merini/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
       >
         <div
@@ -141,7 +139,9 @@
 
       <!-- GitHub -->
       <a
-        href="#"
+        href="https://github.com/SatY213"
+        target="_blank"
+        rel="noopener noreferrer"
         class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
       >
         <div
@@ -155,7 +155,9 @@
 
       <!-- Instagram -->
       <a
-        href="#"
+        href="https://www.instagram.com/hakimerini/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="contact-item flex flex-col items-center p-4 rounded-lg bg-gray-800 hover:bg-gray-750"
       >
         <div

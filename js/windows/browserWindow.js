@@ -1,4 +1,4 @@
-const card = document.getElementById("contact_card");
+const card = document.getElementById("browser_card");
 let isDragging = false;
 let offsetX, offsetY;
 
@@ -25,18 +25,19 @@ document.addEventListener("mouseup", () => {
 });
 
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#close_btn_contact")) {
-    const card = document.getElementById("contact_card");
+  if (e.target.closest("#close_btn_browser")) {
+    const card = document.getElementById("browser_card");
     card.innerHTML = "";
+    card.style.display = "none";
   }
 });
 
-let isMaximized = false;
+let isMaximizedResume = false;
 let prevStyle = {}; // store previous position/size
 
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#maximize_btn_contact")) {
-    if (!isMaximized) {
+  if (e.target.closest("#maximize_btn_browser")) {
+    if (!isMaximizedResume) {
       // Save current position/size
       prevStyle = {
         left: card.style.left,
@@ -48,11 +49,12 @@ document.addEventListener("click", (e) => {
       // Maximize
       card.style.left = "0px";
       card.style.top = "0px";
-      card.style.width = "100vh";
+      card.style.width = "100%";
+      card.style.minWidth = "100vh";
       card.style.height = "100%";
       card.style.borderRadius = "0"; // Windows-like
 
-      isMaximized = true;
+      isMaximizedResume = true;
     } else {
       // Restore previous size/position
       card.style.left = prevStyle.left || "100px";
@@ -61,15 +63,17 @@ document.addEventListener("click", (e) => {
       card.style.height = prevStyle.height || "400px";
       card.style.borderRadius = "0.5rem";
 
-      isMaximized = false;
+      isMaximizedResume = false;
     }
   }
 });
 
 // Handle minimize
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#minimize_btn_contact")) {
-    card.style.display = "none"; // hide it
+  if (e.target.closest("#minimize_btn_browser")) {
+    card.style.display = "none";
+    // card_icon.style.background = "transparent";
+    // hide it
     // later you can show again by clicking icon in taskbar
   }
 });
