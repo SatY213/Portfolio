@@ -1,6 +1,7 @@
-const card = document.getElementById("browser_card");
-const browser_icon = document.getElementById("browser_icon");
+const card = document.getElementById("form_card");
+const form_icon = document.getElementById("form_icon");
 
+// const card_icon = document.getElementById("form_taskbar_icon");
 let isDragging = false;
 let offsetX, offsetY;
 
@@ -27,19 +28,19 @@ document.addEventListener("mouseup", () => {
 });
 
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#close_btn_browser")) {
-    const card = document.getElementById("browser_card");
+  if (e.target.closest("#close_btn_form")) {
+    const card = document.getElementById("form_card");
     card.innerHTML = "";
     card.style.display = "none";
   }
 });
 
-let isMaximizedResume = false;
+let isMaximized = false;
 let prevStyle = {}; // store previous position/size
 
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#maximize_btn_browser")) {
-    if (!isMaximizedResume) {
+  if (e.target.closest("#maximize_btn_form")) {
+    if (!isMaximized) {
       // Save current position/size
       prevStyle = {
         left: card.style.left,
@@ -56,7 +57,7 @@ document.addEventListener("click", (e) => {
       card.style.height = "100%";
       card.style.borderRadius = "0"; // Windows-like
 
-      isMaximizedResume = true;
+      isMaximized = true;
     } else {
       // Restore previous size/position
       card.style.left = prevStyle.left || "100px";
@@ -65,17 +66,17 @@ document.addEventListener("click", (e) => {
       card.style.height = prevStyle.height || "400px";
       card.style.borderRadius = "0.5rem";
 
-      isMaximizedResume = false;
+      isMaximized = false;
     }
   }
 });
 
 // Handle minimize
 document.addEventListener("click", (e) => {
-  if (e.target.closest("#minimize_btn_browser")) {
+  if (e.target.closest("#minimize_btn_form")) {
     card.style.display = "none";
-    browser_icon.parentElement.style.background = "transparent";
-    browser_icon.parentElement.classList.add("short-border");
+    form_icon.parentElement.style.background = "transparent";
+    form_icon.parentElement.classList.add("short-border");
     // card_icon.style.background = "transparent";
     // hide it
     // later you can show again by clicking icon in taskbar

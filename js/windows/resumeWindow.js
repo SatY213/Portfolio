@@ -1,4 +1,5 @@
 const card = document.getElementById("resume_card");
+
 // const card_icon = document.getElementById("contact_taskbar_icon");
 let isDragging = false;
 let offsetX, offsetY;

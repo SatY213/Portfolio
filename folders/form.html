@@ -1,0 +1,255 @@
+<style>
+  .contact-item {
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+  .contact-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left-color: #4299e1;
+  }
+  .social-icon {
+    transition: transform 0.3s ease;
+  }
+  .social-icon:hover {
+    transform: scale(1.2);
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .form-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: #4299e1;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+</style>
+
+<div
+  class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
+>
+  <!-- Title bar -->
+  <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <div
+        class="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center"
+      >
+        <i class="fas fa-envelope text-white text-xs"></i>
+      </div>
+      <span class="text-white text-sm">Contact Form</span>
+    </div>
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_form"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_form"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_form"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <div
+    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+  >
+    <h2
+      class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 flex items-center"
+    >
+      <i class="fas fa-paper-plane mr-3 text-purple-400"></i> Send Me a Message
+    </h2>
+
+    <!-- Contact Form -->
+    <form class="space-y-6" id="contactForm">
+      <!-- Name and Email Row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">
+            <i class="fas fa-user mr-2 text-blue-400"></i>Full Name
+          </label>
+          <input
+            type="text"
+            class="w-full form-input"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">
+            <i class="fas fa-envelope mr-2 text-red-400"></i>Email Address
+          </label>
+          <input
+            type="email"
+            class="w-full form-input"
+            placeholder="your.email@example.com"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Subject -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">
+          <i class="fas fa-tag mr-2 text-green-400"></i>Subject
+        </label>
+        <input
+          type="text"
+          class="w-full form-input"
+          placeholder="What is this regarding?"
+          required
+        />
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">
+          <i class="fas fa-comment mr-2 text-yellow-400"></i>Message
+        </label>
+        <textarea
+          class="w-full form-input h-32 resize-none"
+          placeholder="Type your message here..."
+          required
+        ></textarea>
+      </div>
+
+      <!-- Priority -->
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">
+          <i class="fas fa-flag mr-2 text-orange-400"></i>Priority
+        </label>
+        <div class="grid grid-cols-3 gap-2">
+          <label
+            class="contact-item flex items-center p-3 rounded cursor-pointer"
+          >
+            <input
+              type="radio"
+              name="priority"
+              value="low"
+              class="mr-2"
+              checked
+            />
+            <span class="text-white">Low</span>
+          </label>
+          <label
+            class="contact-item flex items-center p-3 rounded cursor-pointer"
+          >
+            <input type="radio" name="priority" value="medium" class="mr-2" />
+            <span class="text-white">Medium</span>
+          </label>
+          <label
+            class="contact-item flex items-center p-3 rounded cursor-pointer"
+          >
+            <input type="radio" name="priority" value="high" class="mr-2" />
+            <span class="text-white">High</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center pt-4">
+        <button
+          type="submit"
+          class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-lg flex items-center transition-all duration-300 transform hover:scale-105"
+        >
+          <i class="fas fa-paper-plane mr-2"></i> Send Message
+        </button>
+      </div>
+    </form>
+
+    <!-- Quick Contact Info -->
+    <div class="mt-8 pt-6 border-t border-gray-700">
+      <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+        <i class="fas fa-info-circle mr-2 text-blue-400"></i> Quick Response
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="contact-item flex items-center p-3 rounded">
+          <i class="fas fa-clock text-yellow-400 mr-3"></i>
+          <div>
+            <div class="text-gray-400">Response Time</div>
+            <div class="text-white">Within 24 hours</div>
+          </div>
+        </div>
+        <div class="contact-item flex items-center p-3 rounded">
+          <i class="fas fa-check-circle text-green-400 mr-3"></i>
+          <div>
+            <div class="text-gray-400">Availability</div>
+            <div class="text-white">Monday - Friday</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(this);
+      const name = this.querySelector('input[type="text"]').value;
+      const email = this.querySelector('input[type="email"]').value;
+      const subject = this.querySelectorAll('input[type="text"]')[1].value;
+      const message = this.querySelector("textarea").value;
+      const priority = this.querySelector(
+        'input[name="priority"]:checked'
+      ).value;
+
+      // Simulate form submission
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+
+      submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        alert(
+          `Thank you, ${name}! Your message has been sent successfully.\n\nWe'll get back to you at ${email} soon.`
+        );
+        this.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }, 2000);
+    });
+</script>
