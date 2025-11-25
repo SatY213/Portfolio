@@ -32,6 +32,8 @@ document.addEventListener("click", (e) => {
     card.innerHTML = "";
     card.style.display = "none";
   }
+  browser_icon.parentElement.style.background = "transparent";
+  browser_icon.parentElement.classList.remove("short-border");
 });
 
 let isMaximizedResume = false;

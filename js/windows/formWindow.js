@@ -32,6 +32,8 @@ document.addEventListener("click", (e) => {
     const card = document.getElementById("form_card");
     card.innerHTML = "";
     card.style.display = "none";
+    form_icon.parentElement.style.background = "transparent";
+    form_icon.parentElement.classList.remove("short-border");
   }
 });
 
