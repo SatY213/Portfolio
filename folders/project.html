@@ -1,0 +1,358 @@
+<style>
+  .project-folder {
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .project-folder:hover {
+    background: #ffffff33 !important;
+  }
+
+  .project-folder.selected {
+    background: rgba(66, 153, 225, 0.2) !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .details-panel {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .detail-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+</style>
+
+<div
+  class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
+  id="project_container"
+>
+  <!-- Title bar -->
+  <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <img src="./images/FolderIcon.png" alt="" style="width: 20px" />
+      <span class="text-white text-sm">Projects</span>
+    </div>
+
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_project"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_project"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_project"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <div
+    class="flex overflow-hidden bg-gray-900"
+    style="height: calc(100vh - 100px)"
+  >
+    <!-- Left sidebar - Projects (2/3 of screen) -->
+    <div class="w-2/3 p-6 overflow-y-auto">
+      <!-- Responsive grid - keeping your original folder sizes -->
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+      >
+        <!-- Youchoz Project -->
+        <div
+          class="project-folder flex flex-col items-center cursor-pointer"
+          data-project="youchoz"
+          onclick="showProjectDetails('youchoz')"
+        >
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="Youchoz" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Youchoz</p>
+        </div>
+
+        <!-- Mystidia Project -->
+        <div
+          class="project-folder flex flex-col items-center cursor-pointer"
+          data-project="mystidia"
+          onclick="showProjectDetails('mystidia')"
+        >
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="Mystidia" />
+          </div>
+          <p class="mt-2 text-sm font-medium">Mystidia</p>
+        </div>
+
+        <!-- GoGermany Project -->
+        <div
+          class="project-folder flex flex-col items-center cursor-pointer"
+          data-project="gogermany"
+          onclick="showProjectDetails('gogermany')"
+        >
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="GoGermany" />
+          </div>
+          <p class="mt-2 text-sm font-medium">GoGermany</p>
+        </div>
+
+        <!-- RoissyVoituriter Project -->
+        <div
+          class="project-folder flex flex-col items-center cursor-pointer"
+          data-project="roissyvoituriter"
+          onclick="showProjectDetails('roissyvoituriter')"
+        >
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="RoissyVoituriter" />
+          </div>
+          <p class="mt-2 text-sm font-medium">RoissyVoituriter</p>
+        </div>
+
+        <!-- EduAssistant Project -->
+        <div
+          class="project-folder flex flex-col items-center cursor-pointer"
+          data-project="eduassistant"
+          onclick="showProjectDetails('eduassistant')"
+        >
+          <div
+            class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+          >
+            <img src="./images/FolderIcon.png" alt="EduAssistant" />
+          </div>
+          <p class="mt-2 text-sm font-medium">EduAssistant</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right panel - Project Details (1/3 of screen) -->
+    <div class="w-1/3 details-panel p-6 overflow-y-auto bg-gray-850">
+      <!-- Default empty state -->
+      <div
+        id="default-details"
+        class="h-full flex flex-col items-center justify-center text-gray-500 py-12"
+      >
+        <div
+          class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center mb-4"
+        >
+          <img src="./images/FolderIcon.png" alt="" class="opacity-50" />
+        </div>
+        <p class="text-lg mb-2 text-white">Select a project</p>
+        <p class="text-sm text-gray-400">
+          Click on any project to view details
+        </p>
+      </div>
+
+      <!-- Youchoz Details -->
+      <div id="youchoz-details" class="hidden">
+        <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+          <div class="w-8 h-8 mr-3 rounded-lg flex items-center justify-center">
+            <img src="./images/FolderIcon.png" alt="Youchoz" />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">Youchoz</h3>
+            <p class="text-sm text-gray-400">File Folder</p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Type:</div>
+            <div class="text-white">File Folder</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">File Location:</div>
+            <div class="text-white">\Hakim\Projects\Youchoz</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Date Modified:</div>
+            <div class="text-white">2/4/2026 4:13 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mystidia Details -->
+      <div id="mystidia-details" class="hidden">
+        <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+          <div class="w-8 h-8 mr-3 rounded-lg flex items-center justify-center">
+            <img src="./images/FolderIcon.png" alt="Mystidia" />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">Mystidia</h3>
+            <p class="text-sm text-gray-400">File Folder</p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Type:</div>
+            <div class="text-white">File Folder</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">File Location:</div>
+            <div class="text-white">\Hakim\Projects\Mystidia</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Date Modified:</div>
+            <div class="text-white">2/4/2026 4:13 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GoGermany Details -->
+      <div id="gogermany-details" class="hidden">
+        <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+          <div class="w-8 h-8 mr-3 rounded-lg flex items-center justify-center">
+            <img src="./images/FolderIcon.png" alt="GoGermany" />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">GoGermany</h3>
+            <p class="text-sm text-gray-400">File Folder</p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Type:</div>
+            <div class="text-white">File Folder</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">File Location:</div>
+            <div class="text-white">\Hakim\Projects\GoGermany</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Date Modified:</div>
+            <div class="text-white">2/4/2026 4:13 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RoissyVoituriter Details -->
+      <div id="roissyvoituriter-details" class="hidden">
+        <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+          <div class="w-8 h-8 mr-3 rounded-lg flex items-center justify-center">
+            <img src="./images/FolderIcon.png" alt="RoissyVoituriter" />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">RoissyVoituriter</h3>
+            <p class="text-sm text-gray-400">File Folder</p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Type:</div>
+            <div class="text-white">File Folder</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">File Location:</div>
+            <div class="text-white">\Hakim\Projects\RoissyVoituriter</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Date Modified:</div>
+            <div class="text-white">2/4/2026 4:13 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EduAssistant Details -->
+      <div id="eduassistant-details" class="hidden">
+        <div class="flex items-center mb-6 pb-4 border-b border-gray-700">
+          <div class="w-8 h-8 mr-3 rounded-lg flex items-center justify-center">
+            <img src="./images/FolderIcon.png" alt="EduAssistant" />
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-white">EduAssistant</h3>
+            <p class="text-sm text-gray-400">File Folder</p>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Type:</div>
+            <div class="text-white">File Folder</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">File Location:</div>
+            <div class="text-white">\Hakim\Projects\EduAssistant</div>
+          </div>
+          <div class="detail-item">
+            <div class="text-sm text-gray-400">Date Modified:</div>
+            <div class="text-white">2/4/2026 4:13 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Add click functionality to show project details
+  function showProjectDetails(projectName) {
+    // Hide all detail sections
+    const allDetails = document.querySelectorAll('[id$="-details"]');
+    allDetails.forEach((detail) => detail.classList.add("hidden"));
+
+    // Show the selected project details
+    const selectedDetail = document.getElementById(`${projectName}-details`);
+    if (selectedDetail) {
+      selectedDetail.classList.remove("hidden");
+    }
+
+    // Hide default message
+    const defaultDetails = document.getElementById("default-details");
+    if (defaultDetails) {
+      defaultDetails.classList.add("hidden");
+    }
+
+    // Update selected state on folders
+    const allFolders = document.querySelectorAll(".project-folder");
+    allFolders.forEach((folder) => folder.classList.remove("selected"));
+
+    const selectedFolder = document.querySelector(
+      `[data-project="${projectName}"]`,
+    );
+    if (selectedFolder) {
+      selectedFolder.classList.add("selected");
+    }
+  }
+
+  // Initialize with first project selected
+  document.addEventListener("DOMContentLoaded", function () {
+    // You can comment this out if you don't want a default selection
+    // showProjectDetails('youchoz');
+  });
+</script>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -26,20 +26,27 @@
         background-size: cover;
         overflow: hidden;
         height: calc(100vh - 56px);
-        position: absolute;
+        position: fixed;
         width: 100%;
+        touch-action: none;
       }
 
       .window {
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
       }
 
       .taskbar-icon:hover {
         background: #ffffff33 !important;
       }
+      .folder {
+        padding: 2px;
+        border-radius: 4px;
+      }
 
       .folder:hover {
-        transform: translateY(-5px);
+        background: #ffffff33 !important;
       }
 
       /* Scrollbar styling */
@@ -66,13 +73,16 @@
       #contact_card,
       #resume_card,
       #browser_card,
-      #form_card {
+      #form_card,
+      #project_card {
         position: absolute;
         top: 100px; /* initial position */
         left: 100px;
         width: 600px; /* set a default width */
         height: calc(100% - 56px);
-        cursor: grab;
+      }
+      #project_card {
+        width: 1100px; /* set a default width */
       }
       .window {
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -102,12 +112,18 @@
   <body class="h-screen flex flex-col text-white bg-gray-900">
     <div class="background" id="background">
       <!-- Desktop Content -->
-      <div class="overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12">
+      <div
+        class="overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12 gap-6"
+      >
         <!-- Projects Folder -->
         <div class="folder text-center cursor-pointer">
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-            onclick='alert("This feature is currently being developed and will be available soon.")'
+            onclick="
+              alert(
+                'This feature is currently being developed and will be available soon.',
+              )
+            "
           >
             <img src="./images/RecycleBin.png" alt="" />
           </div>
@@ -116,10 +132,10 @@
         <!--  -->
         <div
           class="folder text-center cursor-pointer transition-transform duration-300"
-          onclick='alert("This feature is currently being developed and will be available soon.")'
         >
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
+            id="project_icon"
           >
             <img src="./images/FolderIcon.png" alt="" />
           </div>
@@ -156,10 +172,12 @@
       </div>
 
       <!-- Windows -->
+
       <div class="contact_card hidden" id="contact_card"></div>
       <div class="resume_card hidden" id="resume_card"></div>
       <div class="browser_card hidden" id="browser_card"></div>
       <div class="form_card hidden" id="form_card"></div>
+      <div class="project_card hidden" id="project_card"></div>
     </div>
     <!-- Taskbar -->
     <div
@@ -167,13 +185,21 @@
     >
       <div class="flex items-center space-x-4">
         <div
-          onclick='alert("This feature is currently being developed and will be available soon.")'
+          onclick="
+            alert(
+              'This feature is currently being developed and will be available soon.',
+            )
+          "
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <i class="fab fa-windows text-blue-400 text-[24px]"></i>
         </div>
         <div
-          onclick='alert("This feature is currently being developed and will be available soon.")'
+          onclick="
+            alert(
+              'This feature is currently being developed and will be available soon.',
+            )
+          "
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <i class="fas fa-search text-gray-300"></i>
@@ -182,8 +208,8 @@
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
           <div
-            onclick='alert("This feature is currently being developed and will be available soon.")'
             class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="project_task_icon"
           >
             <img src="./images/FolderIcon.png" alt="" />
           </div>
@@ -227,6 +253,10 @@
       const browser_icon = document.getElementById("browser_icon");
       const form_container = document.getElementById("form_card");
       const form_icon = document.getElementById("form_icon");
+
+      const project_container = document.getElementById("project_card");
+      const project_icon = document.getElementById("project_icon");
+      const project_task_icon = document.getElementById("project_task_icon");
 
       resume_icon.addEventListener("dblclick", async () => {
         resume_container.style.display = "block";
@@ -314,11 +344,33 @@
           card_container.innerHTML = html;
         }
       });
+      project_icon.addEventListener("dblclick", async () => {
+        project_container.style.display = "block";
+        if (!project_container.innerHTML) {
+          // use project_container here
+          // load once
+          const response = await fetch("./folders/project.html");
+          const html = await response.text();
+          project_container.innerHTML = html;
+          project_container.querySelectorAll("script").forEach((oldScript) => {
+            const newScript = document.createElement("script");
+            if (oldScript.src) {
+              newScript.src = oldScript.src; // external script
+            } else {
+              newScript.textContent = oldScript.textContent; // inline script
+            }
+            document.body.appendChild(newScript); // append to execute
+          });
+          project_task_icon.parentElement.style.background = "#ffffff33";
+          project_task_icon.parentElement.classList.remove("short-border");
+        }
+      });
     </script>
     <script type="module" src="./js/windows/contactWindow.js"></script>
     <script type="module" src="./js/windows/resumeWindow.js"></script>
     <script type="module" src="./js/windows/browserWindow.js"></script>
     <script type="module" src="./js/windows/formWindow.js"></script>
+    <script type="module" src="./js/windows/projectWindow.js"></script>
 
     <script src="./js/clock.js"></script>
   </body>

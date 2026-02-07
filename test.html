@@ -1,0 +1,14 @@
+<!doctype html>
+<script type="module">
+  import { createClient } from "https://g4f.dev/dist/js/providers.js";
+
+  const client = createClient("azure");
+  const result = await client.chat.completions.create({
+    model: "auto",
+    messages: [{ role: "user", content: "Explain quantum computing" }],
+  });
+  console.log(result);
+</script>
+<body>
+  Open console to see error
+</body>

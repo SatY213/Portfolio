@@ -51,7 +51,6 @@ document.addEventListener("click", (e) => {
       card.style.left = "0px";
       card.style.top = "0px";
       card.style.width = "100%";
-      card.style.minWidth = "100vh";
       card.style.height = "100%";
       card.style.borderRadius = "0"; // Windows-like
 
