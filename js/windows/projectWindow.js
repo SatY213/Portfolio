@@ -1,4 +1,6 @@
 const card = document.getElementById("project_card");
+const project_task_icon = document.getElementById("project_task_icon");
+
 // const card_icon = document.getElementById("contact_taskbar_icon");
 let isDragging = false;
 let offsetX, offsetY;
@@ -35,6 +37,8 @@ document.addEventListener("click", (e) => {
     const card = document.getElementById("project_card");
     card.innerHTML = "";
     card.style.display = "none";
+    project_task_icon.parentElement.style.background = "transparent";
+    project_task_icon.parentElement.classList.remove("short-border");
   }
 });
 
@@ -74,7 +78,6 @@ document.addEventListener("click", (e) => {
 
 // Handle minimize
 document.addEventListener("click", (e) => {
-  const project_task_icon = document.getElementById("project_task_icon");
   if (e.target.closest("#minimize_btn_project")) {
     card.style.display = "none";
     project_task_icon.parentElement.style.background = "transparent";

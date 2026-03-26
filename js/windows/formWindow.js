@@ -1,12 +1,14 @@
 const card = document.getElementById("form_card");
-const form_icon = document.getElementById("form_icon");
+const form_task_icon = document.getElementById("form_task_icon");
 
 // const card_icon = document.getElementById("form_taskbar_icon");
 let isDragging = false;
 let offsetX, offsetY;
-
+let isMaximized = false;
 // Start dragging on mousedown
 card.addEventListener("mousedown", (e) => {
+  if (isMaximized) return;
+
   isDragging = true;
   offsetX = e.clientX - card.offsetLeft;
   offsetY = e.clientY - card.offsetTop;
@@ -15,6 +17,8 @@ card.addEventListener("mousedown", (e) => {
 
 // Move card on mousemove
 document.addEventListener("mousemove", (e) => {
+  if (isMaximized) return;
+
   if (isDragging) {
     card.style.left = `${e.clientX - offsetX}px`;
     card.style.top = `${e.clientY - offsetY}px`;
@@ -32,12 +36,12 @@ document.addEventListener("click", (e) => {
     const card = document.getElementById("form_card");
     card.innerHTML = "";
     card.style.display = "none";
-    form_icon.parentElement.style.background = "transparent";
-    form_icon.parentElement.classList.remove("short-border");
+    form_task_icon.parentElement.style.background = "transparent";
+    form_task_icon.parentElement.classList.remove("short-border");
   }
 });
 
-let isMaximized = false;
+isMaximized = false;
 let prevStyle = {}; // store previous position/size
 
 document.addEventListener("click", (e) => {
@@ -76,8 +80,8 @@ document.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => {
   if (e.target.closest("#minimize_btn_form")) {
     card.style.display = "none";
-    form_icon.parentElement.style.background = "transparent";
-    form_icon.parentElement.classList.add("short-border");
+    form_task_icon.parentElement.style.background = "transparent";
+    form_task_icon.parentElement.classList.add("short-border");
     // card_icon.style.background = "transparent";
     // hide it
     // later you can show again by clicking icon in taskbar

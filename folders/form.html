@@ -50,10 +50,8 @@
   <!-- Title bar -->
   <div class="flex justify-between items-center p-3 bg-gray-700">
     <div class="flex items-center space-x-2">
-      <div
-        class="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center"
-      >
-        <i class="fas fa-envelope text-white text-xs"></i>
+      <div class="w-5 h-5 flex items-center justify-center">
+        <i class="fas fa-envelope text-green-400 text-xs"></i>
       </div>
       <span class="text-white text-sm">Contact Form</span>
     </div>
@@ -150,72 +148,15 @@
         ></textarea>
       </div>
 
-      <!-- Priority -->
-      <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
-          <i class="fas fa-flag mr-2 text-orange-400"></i>Priority
-        </label>
-        <div class="grid grid-cols-3 gap-2">
-          <label
-            class="contact-item flex items-center p-3 rounded cursor-pointer"
-          >
-            <input
-              type="radio"
-              name="priority"
-              value="low"
-              class="mr-2"
-              checked
-            />
-            <span class="text-white">Low</span>
-          </label>
-          <label
-            class="contact-item flex items-center p-3 rounded cursor-pointer"
-          >
-            <input type="radio" name="priority" value="medium" class="mr-2" />
-            <span class="text-white">Medium</span>
-          </label>
-          <label
-            class="contact-item flex items-center p-3 rounded cursor-pointer"
-          >
-            <input type="radio" name="priority" value="high" class="mr-2" />
-            <span class="text-white">High</span>
-          </label>
-        </div>
-      </div>
-
       <!-- Submit Button -->
-      <div class="flex justify-center pt-4">
+      <div class="flex justify-center pt-4 border-t border-gray-700">
         <button
-          type="submit"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-lg flex items-center transition-all duration-300 transform hover:scale-105"
+          class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded flex items-center"
         >
           <i class="fas fa-paper-plane mr-2"></i> Send Message
         </button>
       </div>
     </form>
-
-    <!-- Quick Contact Info -->
-    <div class="mt-8 pt-6 border-t border-gray-700">
-      <h3 class="text-lg font-medium text-white mb-4 flex items-center">
-        <i class="fas fa-info-circle mr-2 text-blue-400"></i> Quick Response
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div class="contact-item flex items-center p-3 rounded">
-          <i class="fas fa-clock text-yellow-400 mr-3"></i>
-          <div>
-            <div class="text-gray-400">Response Time</div>
-            <div class="text-white">Within 24 hours</div>
-          </div>
-        </div>
-        <div class="contact-item flex items-center p-3 rounded">
-          <i class="fas fa-check-circle text-green-400 mr-3"></i>
-          <div>
-            <div class="text-gray-400">Availability</div>
-            <div class="text-white">Monday - Friday</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -231,9 +172,6 @@
       const email = this.querySelector('input[type="email"]').value;
       const subject = this.querySelectorAll('input[type="text"]')[1].value;
       const message = this.querySelector("textarea").value;
-      const priority = this.querySelector(
-        'input[name="priority"]:checked'
-      ).value;
 
       // Simulate form submission
       const submitBtn = this.querySelector('button[type="submit"]');
@@ -245,7 +183,7 @@
 
       setTimeout(() => {
         alert(
-          `Thank you, ${name}! Your message has been sent successfully.\n\nWe'll get back to you at ${email} soon.`
+          `Thank you, ${name}! Your message has been sent successfully.\n\nWe'll get back to you at ${email} soon.`,
         );
         this.reset();
         submitBtn.innerHTML = originalText;

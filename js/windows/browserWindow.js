@@ -1,11 +1,14 @@
 const card = document.getElementById("browser_card");
-const browser_icon = document.getElementById("browser_icon");
+const browser_task_icon = document.getElementById("browser_task_icon");
 
 let isDragging = false;
 let offsetX, offsetY;
+let isMaximized = false;
 
 // Start dragging on mousedown
 card.addEventListener("mousedown", (e) => {
+  if (isMaximized) return;
+
   isDragging = true;
   offsetX = e.clientX - card.offsetLeft;
   offsetY = e.clientY - card.offsetTop;
@@ -14,6 +17,8 @@ card.addEventListener("mousedown", (e) => {
 
 // Move card on mousemove
 document.addEventListener("mousemove", (e) => {
+  if (isMaximized) return;
+
   if (isDragging) {
     card.style.left = `${e.clientX - offsetX}px`;
     card.style.top = `${e.clientY - offsetY}px`;
@@ -31,17 +36,17 @@ document.addEventListener("click", (e) => {
     const card = document.getElementById("browser_card");
     card.innerHTML = "";
     card.style.display = "none";
+    browser_task_icon.parentElement.style.background = "transparent";
+    browser_task_icon.parentElement.classList.remove("short-border");
   }
-  browser_icon.parentElement.style.background = "transparent";
-  browser_icon.parentElement.classList.remove("short-border");
 });
 
-let isMaximizedResume = false;
+isMaximized = false;
 let prevStyle = {}; // store previous position/size
 
 document.addEventListener("click", (e) => {
   if (e.target.closest("#maximize_btn_browser")) {
-    if (!isMaximizedResume) {
+    if (!isMaximized) {
       // Save current position/size
       prevStyle = {
         left: card.style.left,
@@ -57,7 +62,7 @@ document.addEventListener("click", (e) => {
       card.style.height = "100%";
       card.style.borderRadius = "0"; // Windows-like
 
-      isMaximizedResume = true;
+      isMaximized = true;
     } else {
       // Restore previous size/position
       card.style.left = prevStyle.left || "100px";
@@ -66,7 +71,7 @@ document.addEventListener("click", (e) => {
       card.style.height = prevStyle.height || "400px";
       card.style.borderRadius = "0.5rem";
 
-      isMaximizedResume = false;
+      isMaximized = false;
     }
   }
 });
@@ -75,8 +80,8 @@ document.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => {
   if (e.target.closest("#minimize_btn_browser")) {
     card.style.display = "none";
-    browser_icon.parentElement.style.background = "transparent";
-    browser_icon.parentElement.classList.add("short-border");
+    browser_task_icon.parentElement.style.background = "transparent";
+    browser_task_icon.parentElement.classList.add("short-border");
     // card_icon.style.background = "transparent";
     // hide it
     // later you can show again by clicking icon in taskbar

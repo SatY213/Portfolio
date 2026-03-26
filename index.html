@@ -36,6 +36,9 @@
           transform 0.2s,
           box-shadow 0.2s;
       }
+      .no-select {
+        user-select: none;
+      }
 
       .taskbar-icon:hover {
         background: #ffffff33 !important;
@@ -74,7 +77,8 @@
       #resume_card,
       #browser_card,
       #form_card,
-      #project_card {
+      #project_card,
+      #about_card {
         position: absolute;
         top: 100px; /* initial position */
         left: 100px;
@@ -116,7 +120,7 @@
         class="overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12 gap-6"
       >
         <!-- Projects Folder -->
-        <div class="folder text-center cursor-pointer">
+        <div class="folder text-center cursor-pointer no-select">
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
             onclick="
@@ -131,11 +135,11 @@
         </div>
         <!--  -->
         <div
-          class="folder text-center cursor-pointer transition-transform duration-300"
+          class="folder text-center cursor-pointer no-select"
+          id="project_icon"
         >
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
-            id="project_icon"
           >
             <img src="./images/FolderIcon.png" alt="" />
           </div>
@@ -143,7 +147,10 @@
         </div>
 
         <!-- Other Desktop Icons -->
-        <div class="folder text-center cursor-pointer">
+        <div
+          class="folder text-center cursor-pointer no-select"
+          id="about_icon"
+        >
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
           >
@@ -152,7 +159,10 @@
           <p class="mt-2 text-sm font-medium">About Me</p>
         </div>
 
-        <div class="folder text-center cursor-pointer" id="contact_icon">
+        <div
+          class="folder text-center cursor-pointer no-select"
+          id="contact_icon"
+        >
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
           >
@@ -161,7 +171,10 @@
           <p class="mt-2 text-sm font-medium">Contact</p>
         </div>
 
-        <div class="folder text-center cursor-pointer" id="resume_icon">
+        <div
+          class="folder text-center cursor-pointer no-select"
+          id="resume_icon"
+        >
           <div
             class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center"
           >
@@ -178,21 +191,23 @@
       <div class="browser_card hidden" id="browser_card"></div>
       <div class="form_card hidden" id="form_card"></div>
       <div class="project_card hidden" id="project_card"></div>
+      <div class="about_card hidden" id="about_card"></div>
+      <div class="menu_bar" id="menu_bar"></div>
     </div>
     <!-- Taskbar -->
     <div
-      class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between px-4 absolute bottom-0 left-0 right-0"
+      class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between pl-4 pr-2 absolute bottom-0 left-0 right-0"
     >
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-4 no-select" id="tasks_container">
         <div
-          onclick="
-            alert(
-              'This feature is currently being developed and will be available soon.',
-            )
-          "
           class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer"
         >
-          <i class="fab fa-windows text-blue-400 text-[24px]"></i>
+          <div
+            class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="menu_task_icon"
+          >
+            <i class="fab fa-windows text-blue-400 text-[24px]"></i>
+          </div>
         </div>
         <div
           onclick="
@@ -219,7 +234,7 @@
         >
           <div
             class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
-            id="form_icon"
+            id="form_task_icon"
           >
             <i class="fas fa-envelope text-green-400 text-[24px]"></i>
           </div>
@@ -229,148 +244,219 @@
         >
           <div
             class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
-            id="browser_icon"
+            id="browser_task_icon"
           >
             <img src="./images/browserIcon.png" alt="" />
           </div>
         </div>
+        <div
+          class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer hidden"
+        >
+          <div
+            class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="about_task_icon"
+          >
+            <img src="./images/infoIcon.png" alt="" />
+          </div>
+        </div>
+        <div
+          class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer hidden"
+        >
+          <div
+            class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="resume_task_icon"
+          >
+            <img src="./images/pdfIcon.png" alt="" />
+          </div>
+        </div>
+        <div
+          class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer hidden"
+        >
+          <div
+            class="w-7 h-7 mx-auto rounded-lg flex items-center justify-center"
+            id="contact_task_icon"
+          >
+            <img src="./images/ContactIcon.png" alt="" />
+          </div>
+        </div>
       </div>
 
-      <div class="flex items-center space-x-2 flex-col">
-        <div id="live-time" class="text-xs text-gray-300"></div>
-        <div id="live-date" class="text-xs text-gray-300"></div>
+      <div class="flex items-center">
+        <div class="flex items-center space-x-2 flex-col">
+          <div id="live-time" class="text-xs text-gray-300"></div>
+          <div id="live-date" class="text-xs text-gray-300"></div>
+        </div>
+        <div
+          class="h-4 w-3 border-r border-r-2 border-transparent hover:border-gray-400"
+        ></div>
       </div>
     </div>
 
-    <script>
-      // Simple interaction for the folder
-
-      const card_icon = document.getElementById("contact_icon");
-      const card_container = document.getElementById("contact_card");
-      const resume_container = document.getElementById("resume_card");
+    <script type="module">
+      import { loadFolder } from "./js/loadWindow.js";
+      // Resume ---------------------------------------------------------------
       const resume_icon = document.getElementById("resume_icon");
-      const browser_container = document.getElementById("browser_card");
-      const browser_icon = document.getElementById("browser_icon");
-      const form_container = document.getElementById("form_card");
-      const form_icon = document.getElementById("form_icon");
-
-      const project_container = document.getElementById("project_card");
+      const resume_container = document.getElementById("resume_card");
+      const resume_task_icon = document.getElementById("resume_task_icon");
+      // Project ---------------------------------------------------------------
       const project_icon = document.getElementById("project_icon");
+      const project_container = document.getElementById("project_card");
       const project_task_icon = document.getElementById("project_task_icon");
+      // Contact ---------------------------------------------------------------
+      const contact_icon = document.getElementById("contact_icon");
+      const contact_container = document.getElementById("contact_card");
+      const contact_task_icon = document.getElementById("contact_task_icon");
+      // Browser ---------------------------------------------------------------
+      const browser_task_icon = document.getElementById("browser_task_icon");
+      const browser_container = document.getElementById("browser_card");
+      // About Me ---------------------------------------------------------------
+      const about_icon = document.getElementById("about_icon");
+      const about_container = document.getElementById("about_card");
+      const about_task_icon = document.getElementById("about_task_icon");
+      // Menu ---------------------------------------------------------------
+      const menu_task_icon = document.getElementById("menu_task_icon");
+      const menu_container = document.getElementById("menu_bar");
+      // Form ---------------------------------------------------------------
+      const form_task_icon = document.getElementById("form_task_icon");
+      const form_container = document.getElementById("form_card");
 
-      resume_icon.addEventListener("dblclick", async () => {
-        resume_container.style.display = "block";
-        if (!resume_container.innerHTML) {
-          // use resume_container here
-          // load once
-          const response = await fetch("./folders/resume.html");
+      resume_icon.addEventListener("dblclick", () =>
+        loadFolder({
+          container: resume_container,
+          url: "./folders/resume.html",
+          toggle: true,
+          taskIcon: {
+            exist: false,
+            element: resume_task_icon,
+          },
+        }),
+      );
+      resume_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: resume_container,
+          url: "./folders/resume.html",
+          toggle: true,
+          taskIcon: {
+            exist: true,
+            element: resume_task_icon,
+          },
+        }),
+      );
 
-          const html = await response.text();
-
-          resume_container.innerHTML = html;
-
-          // Find all scripts inside fetched HTML
-          resume_container.querySelectorAll("script").forEach((oldScript) => {
-            const newScript = document.createElement("script");
-            if (oldScript.src) {
-              newScript.src = oldScript.src; // external script
-            } else {
-              newScript.textContent = oldScript.textContent; // inline script
-            }
-            document.body.appendChild(newScript); // append to execute
-          });
-        }
-      });
-
-      form_icon.addEventListener("click", async () => {
-        form_container.style.display = "block";
-        if (!form_container.innerHTML) {
-          // use form_container here
-          // load once
-          const response = await fetch("./folders/form.html");
-
-          const html = await response.text();
-
-          form_container.innerHTML = html;
-
-          // Find all scripts inside fetched HTML
-          form_container.querySelectorAll("script").forEach((oldScript) => {
-            const newScript = document.createElement("script");
-            if (oldScript.src) {
-              newScript.src = oldScript.src; // external script
-            } else {
-              newScript.textContent = oldScript.textContent; // inline script
-            }
-            document.body.appendChild(newScript); // append to execute
-          });
-        }
-        form_icon.parentElement.style.background = "#ffffff33";
-        form_icon.parentElement.classList.remove("short-border");
-      });
-
-      browser_icon.addEventListener("click", async () => {
-        browser_container.style.display = "block";
-        if (!browser_container.innerHTML) {
-          // use browser_container here
-          // load once
-          const response = await fetch("./folders/browser.html");
-
-          const html = await response.text();
-
-          browser_container.innerHTML = html;
-
-          // Find all scripts inside fetched HTML
-          browser_container.querySelectorAll("script").forEach((oldScript) => {
-            const newScript = document.createElement("script");
-            if (oldScript.src) {
-              newScript.src = oldScript.src; // external script
-            } else {
-              newScript.textContent = oldScript.textContent; // inline script
-            }
-            document.body.appendChild(newScript); // append to execute
-          });
-        }
-        browser_icon.parentElement.style.background = "#ffffff33";
-        browser_icon.parentElement.classList.remove("short-border");
-      });
-
-      card_icon.addEventListener("dblclick", async () => {
-        card_container.style.display = "block";
-        if (!card_container.innerHTML) {
-          // use card_container here
-          // load once
-          const response = await fetch("./folders/contact.html");
-          const html = await response.text();
-          card_container.innerHTML = html;
-        }
-      });
-      project_icon.addEventListener("dblclick", async () => {
-        project_container.style.display = "block";
-        if (!project_container.innerHTML) {
-          // use project_container here
-          // load once
-          const response = await fetch("./folders/project.html");
-          const html = await response.text();
-          project_container.innerHTML = html;
-          project_container.querySelectorAll("script").forEach((oldScript) => {
-            const newScript = document.createElement("script");
-            if (oldScript.src) {
-              newScript.src = oldScript.src; // external script
-            } else {
-              newScript.textContent = oldScript.textContent; // inline script
-            }
-            document.body.appendChild(newScript); // append to execute
-          });
-          project_task_icon.parentElement.style.background = "#ffffff33";
-          project_task_icon.parentElement.classList.remove("short-border");
-        }
-      });
+      // Project ---------------------------------------------------------------
+      project_icon.addEventListener("dblclick", () =>
+        loadFolder({
+          container: project_container,
+          url: "./folders/project.html",
+          taskIcon: {
+            exist: true,
+            element: project_task_icon,
+          },
+        }),
+      );
+      project_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: project_container,
+          url: "./folders/project.html",
+          toggle: true,
+          taskIcon: {
+            exist: true,
+            element: project_task_icon,
+          },
+        }),
+      );
+      // Contact ---------------------------------------------------------------
+      contact_icon.addEventListener("click", () =>
+        loadFolder({
+          container: contact_container,
+          url: "./folders/contact.html",
+          toggle: true,
+          taskIcon: {
+            exist: false,
+            element: document.getElementById("contact_task_icon"),
+          },
+        }),
+      );
+      contact_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: contact_container,
+          url: "./folders/contact.html",
+          toggle: true,
+          taskIcon: {
+            exist: true,
+            element: document.getElementById("contact_task_icon"),
+          },
+        }),
+      );
+      // Browser ---------------------------------------------------------------
+      browser_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: browser_container,
+          url: "./folders/browser.html",
+          taskIcon: {
+            exist: true,
+            element: browser_task_icon,
+          },
+          toggle: true,
+        }),
+      );
+      // About Me ---------------------------------------------------------------
+      about_icon.addEventListener("dblclick", () =>
+        loadFolder({
+          container: about_container,
+          url: "./folders/aboutMe.html",
+          toggle: true,
+          noTaskIcon: true,
+          taskIcon: {
+            exist: false,
+            element: document.getElementById("about_task_icon"),
+          },
+        }),
+      );
+      about_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: about_container,
+          url: "./folders/aboutMe.html",
+          toggle: true,
+          noTaskIcon: true,
+          taskIcon: {
+            exist: true,
+            element: document.getElementById("about_task_icon"),
+          },
+        }),
+      );
+      // Form ---------------------------------------------------------------
+      form_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: form_container,
+          url: "./folders/form.html",
+          taskIcon: {
+            exist: true,
+            element: form_task_icon,
+          },
+          toggle: true,
+        }),
+      );
+      // Menu ---------------------------------------------------------------
+      menu_task_icon.addEventListener("click", () =>
+        loadFolder({
+          container: menu_container,
+          url: "./folders/menu.html",
+          taskIcon: {
+            exist: true,
+            element: menu_task_icon,
+          },
+          toggle: true,
+        }),
+      );
     </script>
+
     <script type="module" src="./js/windows/contactWindow.js"></script>
     <script type="module" src="./js/windows/resumeWindow.js"></script>
     <script type="module" src="./js/windows/browserWindow.js"></script>
     <script type="module" src="./js/windows/formWindow.js"></script>
     <script type="module" src="./js/windows/projectWindow.js"></script>
+    <script type="module" src="./js/windows/aboutWindow.js"></script>
 
     <script src="./js/clock.js"></script>
   </body>

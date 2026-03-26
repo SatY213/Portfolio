@@ -1,0 +1,268 @@
+<style>
+  .start-menu-item {
+    transition: all 0.2s ease;
+    border-radius: 6px;
+  }
+  .start-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  .search-box {
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+  .search-box:focus-within {
+    border-color: #4299e1;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .power-btn {
+    transition: all 0.2s ease;
+  }
+  .power-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+</style>
+
+<div
+  class="w-[500px] h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
+>
+  <!-- Start Menu Content - Left Sidebar Style -->
+  <div class="h-[calc(100vh_-_60px)] bg-gray-900 text-gray-200 flex flex-col">
+    <!-- Search Box - Top -->
+    <div class="p-4">
+      <div
+        class="search-box flex items-center bg-gray-800 rounded-lg px-3 py-2 border border-gray-700"
+      >
+        <i class="fas fa-search text-gray-400 text-sm mr-2"></i>
+        <input
+          type="text"
+          placeholder="Search apps, files..."
+          class="bg-transparent border-none outline-none text-sm text-white w-full placeholder-gray-500"
+        />
+        <i
+          class="fas fa-microphone text-gray-400 text-sm hover:text-blue-400 cursor-pointer"
+        ></i>
+      </div>
+    </div>
+
+    <!-- Pinned Apps Section - Main Content -->
+    <div class="flex-1 overflow-y-auto px-4">
+      <div class="mb-4">
+        <div class="flex justify-between items-center mb-3">
+          <h3
+            class="text-xs font-medium text-gray-400 uppercase tracking-wider"
+          >
+            Pinned
+          </h3>
+          <button class="text-xs text-blue-400 hover:text-blue-300">
+            All apps <i class="fas fa-chevron-right ml-1 text-2xs"></i>
+          </button>
+        </div>
+
+        <!-- Icons Grid - Using your images -->
+        <div class="grid grid-cols-3 gap-2">
+          <!-- Recycle Bin -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+          >
+            <div class="w-10 h-10 flex items-center justify-center mb-1">
+              <img
+                src="./images/RecycleBin.png"
+                alt="Recycle Bin"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >Recycle Bin</span
+            >
+          </div>
+
+          <!-- Projects Folder -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+            id="project_icon"
+          >
+            <div class="w-10 h-10 flex items-center justify-center mb-1">
+              <img
+                src="./images/FolderIcon.png"
+                alt="Projects"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >Projects</span
+            >
+          </div>
+
+          <!-- About Me -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+          >
+            <div class="w-10 h-10 flex items-center justify-center mb-1">
+              <img
+                src="./images/infoIcon.png"
+                alt="About Me"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >About Me</span
+            >
+          </div>
+
+          <!-- Contact -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+            id="contact_icon"
+          >
+            <div class="w-10 h-10 flex items-center justify-center mb-1">
+              <img
+                src="./images/ContactIcon.png"
+                alt="Contact"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >Contact</span
+            >
+          </div>
+
+          <!-- Resume -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+            id="resume_icon"
+          >
+            <div class="w-10 h-10 flex items-center justify-center mb-1">
+              <img
+                src="./images/pdfIcon.png"
+                alt="Resume"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >Resume</span
+            >
+          </div>
+
+          <!-- Browser -->
+          <div
+            class="start-menu-item flex flex-col items-center p-2 rounded-lg cursor-pointer group"
+          >
+            <div
+              class="w-10 h-10 rounded-lg flex items-center justify-center mb-1"
+            >
+              <img
+                src="./images/browserIcon.png"
+                alt="Resume"
+                class="w-8 h-8 transition-transform"
+              />
+            </div>
+            <span class="text-xs text-gray-300 text-center truncate w-full"
+              >Browser</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Folders -->
+      <!-- <div class="mb-4 pt-2">
+        <h3
+          class="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3"
+        >
+          Folders
+        </h3>
+        <div class="space-y-1">
+          <div
+            class="start-menu-item flex items-center p-2 rounded-lg cursor-pointer"
+          >
+            <img
+              src="./images/FolderIcon.png"
+              alt="Documents"
+              class="w-5 h-5 mr-3"
+            />
+            <span class="text-sm text-gray-300">Documents</span>
+          </div>
+          <div
+            class="start-menu-item flex items-center p-2 rounded-lg cursor-pointer"
+          >
+            <i class="fas fa-download text-blue-400 w-5 mr-3"></i>
+            <span class="text-sm text-gray-300">Downloads</span>
+          </div>
+          <div
+            class="start-menu-item flex items-center p-2 rounded-lg cursor-pointer"
+          >
+            <i class="fas fa-image text-green-400 w-5 mr-3"></i>
+            <span class="text-sm text-gray-300">Pictures</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Recent Items -->
+      <div class="mb-4 pt-2">
+        <div class="flex justify-between items-center mb-3">
+          <h3
+            class="text-xs font-medium text-gray-400 uppercase tracking-wider"
+          >
+            Recent
+          </h3>
+          <button class="text-xs text-blue-400 hover:text-blue-300">
+            Clear all
+          </button>
+        </div>
+        <div class="space-y-1">
+          <div
+            class="start-menu-item flex items-center p-2 rounded-lg cursor-pointer"
+          >
+            <i class="fas fa-file-pdf text-red-400 w-5 mr-3"></i>
+            <div class="flex-1 min-w-0">
+              <div class="text-sm text-white truncate">Resume_2026.pdf</div>
+              <div class="text-xs text-gray-500">Yesterday</div>
+            </div>
+          </div>
+          <div
+            class="start-menu-item flex items-center p-2 rounded-lg cursor-pointer"
+          >
+            <i class="fas fa-image text-green-400 w-5 mr-3"></i>
+            <div class="flex-1 min-w-0">
+              <div class="text-sm text-white truncate">
+                Portfolio_Screenshot.png
+              </div>
+              <div class="text-xs text-gray-500">2 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Section - Bottom with Power Icon Right Justified -->
+    <div class="p-3 border-t border-gray-700 bg-gray-800/50">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-9 h-9 rounded-full bg-gray-600 flex items-center justify-center user-avatar cursor-pointer"
+          >
+            <span class="text-white font-semibold text-sm">AM</span>
+          </div>
+          <div>
+            <div class="text-sm text-white font-medium">Abdelhakim MERINI</div>
+          </div>
+        </div>
+        <button
+          class="power-btn w-8 h-8 flex items-center justify-center rounded-lg text-gray-400"
+        >
+          <i class="fas fa-power-off"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

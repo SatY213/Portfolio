@@ -1,19 +1,17 @@
 function updateClock() {
   const now = new Date();
 
-  // Time
   const time = now.toLocaleTimeString([], {
-    hour: "2-digit",
+    hour: "numeric",
     minute: "2-digit",
+    hour12: true,
   });
 
-  // Date
   const date = now.toLocaleDateString();
 
   document.getElementById("live-time").textContent = time;
   document.getElementById("live-date").textContent = date;
 }
 
-// Update every second
 setInterval(updateClock, 1000);
 updateClock();

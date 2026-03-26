@@ -1,0 +1,393 @@
+<style>
+  .skill-tag {
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .edu-card {
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .coursework-item {
+    transition: all 0.2s ease;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>
+
+<div
+  class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
+>
+  <!-- Title bar -->
+  <div class="flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <img src="./images/infoIcon.png" alt="" style="width: 20px" />
+      <span class="text-white text-sm">About Me - Profile</span>
+    </div>
+    <div class="flex space-x-2">
+      <!-- Minimize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="minimize_btn_about"
+      >
+        <i class="fas fa-minus text-xs"></i>
+      </div>
+      <!-- Maximize -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
+        id="maximize_btn_about"
+      >
+        <i class="far fa-square text-xs"></i>
+      </div>
+      <!-- Close -->
+      <div
+        class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
+        id="close_btn_about"
+      >
+        <i class="fas fa-times text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content area -->
+  <div
+    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+  >
+    <!-- Header with profile summary -->
+    <div class="mb-8">
+      <h2
+        class="text-2xl font-semibold mb-4 text-white border-b border-gray-700 pb-2 flex items-center"
+      >
+        <i class="fas fa-user-circle mr-3 text-blue-400"></i> About Me
+      </h2>
+
+      <!-- Summary Card -->
+      <div class="bg-gray-800 rounded-lg p-5 border-l-4 border-blue-500">
+        <p class="text-gray-300 leading-relaxed">
+          Full-Stack Software Engineer with a Master's degree in Computer
+          Science, specializing in Information Systems. Strong foundation in
+          software architecture and hands-on experience designing, building, and
+          deploying scalable, secure applications. Proven ability to deliver
+          efficient solutions for complex problems across the full development
+          lifecycle.
+        </p>
+      </div>
+    </div>
+
+    <!-- Technical Skills Section -->
+    <div class="mb-8">
+      <h3 class="text-xl font-medium mb-4 text-white flex items-center">
+        <i class="fas fa-code mr-3 text-green-400"></i> Technical Skills
+      </h3>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <!-- TypeScript -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-js text-blue-400 text-lg"></i>
+          <span class="text-sm">TypeScript</span>
+        </div>
+        <!-- JavaScript -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-js text-yellow-400 text-lg"></i>
+          <span class="text-sm">JavaScript</span>
+        </div>
+        <!-- Java -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-java text-red-400 text-lg"></i>
+          <span class="text-sm">Java</span>
+        </div>
+        <!-- Python -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-python text-blue-400 text-lg"></i>
+          <span class="text-sm">Python</span>
+        </div>
+        <!-- PHP -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-php text-purple-400 text-lg"></i>
+          <span class="text-sm">PHP</span>
+        </div>
+        <!-- C -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-code text-blue-300 text-lg"></i>
+          <span class="text-sm">C</span>
+        </div>
+        <!-- React -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-react text-cyan-400 text-lg"></i>
+          <span class="text-sm">React</span>
+        </div>
+        <!-- Next.js -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-js text-white text-lg"></i>
+          <span class="text-sm">Next.js</span>
+        </div>
+        <!-- Angular -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-angular text-red-500 text-lg"></i>
+          <span class="text-sm">Angular</span>
+        </div>
+        <!-- NestJS -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-leaf text-red-400 text-lg"></i>
+          <span class="text-sm">NestJS</span>
+        </div>
+        <!-- Express.js -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-server text-gray-400 text-lg"></i>
+          <span class="text-sm">Express.js</span>
+        </div>
+        <!-- Spring Boot -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-leaf text-green-500 text-lg"></i>
+          <span class="text-sm">Spring Boot</span>
+        </div>
+        <!-- MongoDB -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-database text-green-500 text-lg"></i>
+          <span class="text-sm">MongoDB</span>
+        </div>
+        <!-- Oracle -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-database text-red-500 text-lg"></i>
+          <span class="text-sm">Oracle</span>
+        </div>
+        <!-- PostgreSQL -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-database text-blue-400 text-lg"></i>
+          <span class="text-sm">PostgreSQL</span>
+        </div>
+        <!-- GitHub -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-github text-white text-lg"></i>
+          <span class="text-sm">GitHub</span>
+        </div>
+        <!-- GitLab -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-gitlab text-orange-500 text-lg"></i>
+          <span class="text-sm">GitLab</span>
+        </div>
+        <!-- Jest -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-vial text-red-400 text-lg"></i>
+          <span class="text-sm">Jest</span>
+        </div>
+        <!-- Selenium -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-flask text-green-500 text-lg"></i>
+          <span class="text-sm">Selenium</span>
+        </div>
+        <!-- Cypress -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-circle text-green-400 text-lg"></i>
+          <span class="text-sm">Cypress</span>
+        </div>
+        <!-- SysML -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-diagram-project text-yellow-400 text-lg"></i>
+          <span class="text-sm">SysML</span>
+        </div>
+        <!-- UML -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-sitemap text-purple-400 text-lg"></i>
+          <span class="text-sm">UML</span>
+        </div>
+        <!-- AWS -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-aws text-orange-400 text-lg"></i>
+          <span class="text-sm">AWS</span>
+        </div>
+        <!-- Google Cloud -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-google text-blue-400 text-lg"></i>
+          <span class="text-sm">Google Cloud</span>
+        </div>
+        <!-- Docker -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fab fa-docker text-blue-500 text-lg"></i>
+          <span class="text-sm">Docker</span>
+        </div>
+        <!-- XML -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-code text-orange-400 text-lg"></i>
+          <span class="text-sm">XML</span>
+        </div>
+        <!-- JSON -->
+        <div
+          class="skill-tag flex items-center space-x-2 bg-gray-800 rounded-lg p-2 cursor-default"
+        >
+          <i class="fas fa-brackets-curly text-green-400 text-lg"></i>
+          <span class="text-sm">JSON</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="mb-8">
+      <h3 class="text-xl font-medium mb-4 text-white flex items-center">
+        <i class="fas fa-graduation-cap mr-3 text-yellow-400"></i> Education
+      </h3>
+
+      <div class="space-y-4">
+        <!-- Master's Degree -->
+        <div class="edu-card bg-gray-800 rounded-lg p-4">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h4 class="text-lg font-medium text-white">
+                Master's in Information Systems & Knowledge
+              </h4>
+              <p class="text-blue-400 text-sm">2024</p>
+            </div>
+            <div class="text-right">
+              <p class="text-white">Abou bekr belkaid University</p>
+              <p class="text-gray-400 text-sm">Tlemcen</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bachelor's Degree -->
+        <div class="edu-card bg-gray-800 rounded-lg p-4">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <h4 class="text-lg font-medium text-white">
+                Bachelor's in Computer Science
+              </h4>
+              <p class="text-blue-400 text-sm">2022</p>
+            </div>
+            <div class="text-right">
+              <p class="text-white">Abou bekr belkaid University</p>
+              <p class="text-gray-400 text-sm">Tlemcen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relevant Coursework -->
+      <div class="mt-4">
+        <h4 class="text-md font-medium mb-3 text-gray-300 flex items-center">
+          <i class="fas fa-book-open mr-2 text-green-400"></i> Relevant
+          Coursework
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300">Requirements engineering</span>
+          </div>
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300">Systems engineering</span>
+          </div>
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300"
+              >Software analyzing and conception</span
+            >
+          </div>
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300">Advanced Databases</span>
+          </div>
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300">Advanced Networking</span>
+          </div>
+          <div class="coursework-item flex items-center p-2 rounded">
+            <i class="fas fa-check-circle text-green-500 text-xs mr-2"></i>
+            <span class="text-sm text-gray-300">Artificial Intelligence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Window controls
+  document.addEventListener("DOMContentLoaded", function () {
+    const minimizeBtn = document.getElementById("minimize_btn_about");
+    const maximizeBtn = document.getElementById("maximize_btn_about");
+    const closeBtn = document.getElementById("close_btn_about");
+
+    if (minimizeBtn) {
+      minimizeBtn.addEventListener("click", function () {
+        console.log("Minimize about window");
+      });
+    }
+
+    if (maximizeBtn) {
+      maximizeBtn.addEventListener("click", function () {
+        console.log("Maximize about window");
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        console.log("Close about window");
+      });
+    }
+  });
+</script>
