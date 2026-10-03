@@ -32,7 +32,7 @@
   class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
 >
   <!-- Title bar -->
-  <div class="flex justify-between items-center p-3 bg-gray-700">
+  <div class="window-header flex justify-between items-center p-3 bg-gray-700">
     <div class="flex items-center space-x-2">
       <img src="./images/ContactIcon.png" alt="" style="width: 20px" />
       <span class="text-white text-sm">Contact Information</span>
@@ -41,32 +41,32 @@
       <!-- Minimize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="minimize_btn_contact"
+        id="minimize_btn_contact" role="button" tabindex="0" aria-label="Minimize window"
       >
-        <i class="fas fa-minus text-xs"></i>
+        <span aria-hidden="true">&minus;</span>
       </div>
 
       <!-- Maximize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="maximize_btn_contact"
+        id="maximize_btn_contact" role="button" tabindex="0" aria-label="Maximize window"
       >
-        <i class="far fa-square text-xs"></i>
+        <span aria-hidden="true">&#9633;</span>
       </div>
 
       <!-- Close -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
-        id="close_btn_contact"
+        id="close_btn_contact" role="button" tabindex="0" aria-label="Close window"
       >
-        <i class="fas fa-times text-xs"></i>
+        <span aria-hidden="true">&times;</span>
       </div>
     </div>
   </div>
 
   <!-- Content area -->
   <div
-    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+    class="window-content p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
   >
     <h2
       class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 flex items-center"
@@ -98,7 +98,7 @@
         </div>
         <div>
           <div class="text-sm text-gray-400">Email</div>
-          <div class="text-white">abdelhakimerini@gmail.com</div>
+          <a class="text-white" href="mailto:abdelhakimerini@gmail.com">abdelhakimerini@gmail.com</a>
         </div>
       </div>
 
@@ -111,7 +111,7 @@
         </div>
         <div>
           <div class="text-sm text-gray-400">Phone</div>
-          <div class="text-white">+213 542 09 18 97</div>
+          <a class="text-white" href="tel:+213542091897">+213 542 09 18 97</a>
         </div>
       </div>
     </div>
@@ -172,7 +172,7 @@
 
     <!-- Quick action -->
     <div class="flex justify-center pt-4 border-t border-gray-700">
-      <button
+      <button data-open="form"
         class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded flex items-center"
       >
         <i class="fas fa-paper-plane mr-2"></i> Send Message

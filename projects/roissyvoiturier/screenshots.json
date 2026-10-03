@@ -1,0 +1,42 @@
+[
+  {
+    "file": "landing.png",
+    "caption": "Landing page"
+  },
+  {
+    "file": "login.png",
+    "caption": "Login interface"
+  },
+  {
+    "file": "new-reservation.png",
+    "caption": "Create a new reservation"
+  },
+  {
+    "file": "reservation.png",
+    "caption": "Reservation details"
+  },
+  {
+    "file": "reservations.png",
+    "caption": "Reservations management"
+  },
+  {
+    "file": "parking-management.png",
+    "caption": "Parking management"
+  },
+  {
+    "file": "parking-stats.png",
+    "caption": "Parking statistics dashboard"
+  },
+  {
+    "file": "tarifs.png",
+    "caption": "Pricing management"
+  },
+  {
+    "file": "code-promo.png",
+    "caption": "Promotional code management"
+  },
+  {
+    "file": "new-coup.png",
+    "caption": "Create a new promotional offer"
+  }
+]

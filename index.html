@@ -2,15 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Abdelhakim's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -112,12 +109,13 @@
         background: gray;
       }
     </style>
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body class="h-screen flex flex-col text-white bg-gray-900">
     <div class="background" id="background">
       <!-- Desktop Content -->
       <div
-        class="overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12 gap-6"
+        class="desktop-icons overflow-auto p-6 px-0 grid grid-cols-4 lg:grid-cols-12 gap-6"
       >
         <!-- Projects Folder -->
         <div class="folder text-center cursor-pointer no-select">
@@ -182,21 +180,26 @@
           </div>
           <p class="mt-2 text-sm font-medium">Resume</p>
         </div>
+        <div class="folder text-center cursor-pointer no-select" id="music_icon">
+          <div class="w-8 h-8 mx-auto rounded-lg flex items-center justify-center bg-purple-600" aria-hidden="true">&#9835;</div>
+          <p class="mt-2 text-sm font-medium">Music</p>
+        </div>
       </div>
 
       <!-- Windows -->
 
-      <div class="contact_card hidden" id="contact_card"></div>
-      <div class="resume_card hidden" id="resume_card"></div>
-      <div class="browser_card hidden" id="browser_card"></div>
-      <div class="form_card hidden" id="form_card"></div>
-      <div class="project_card hidden" id="project_card"></div>
-      <div class="about_card hidden" id="about_card"></div>
-      <div class="menu_bar" id="menu_bar"></div>
+      <div class="contact_card app-card hidden" id="contact_card"></div>
+      <div class="resume_card app-card hidden" id="resume_card"></div>
+      <div class="browser_card app-card hidden" id="browser_card"></div>
+      <div class="form_card app-card hidden" id="form_card"></div>
+      <div class="project_card app-card hidden" id="project_card"></div>
+      <div class="about_card app-card hidden" id="about_card"></div>
+      <div class="music_card app-card hidden" id="music_card"></div>
+      <div class="menu_bar hidden" id="menu_bar"></div>
     </div>
     <!-- Taskbar -->
     <div
-      class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between pl-4 pr-2 absolute bottom-0 left-0 right-0"
+      id="taskbar" class="h-14 bg-gray-800 bg-opacity-70 backdrop-blur-md flex items-center justify-between pl-4 pr-2 absolute bottom-0 left-0 right-0"
     >
       <div class="flex items-center space-x-4 no-select" id="tasks_container">
         <div
@@ -279,184 +282,22 @@
             <img src="./images/ContactIcon.png" alt="" />
           </div>
         </div>
+        <div class="taskbar-icon w-10 h-10 flex items-center justify-center rounded-lg cursor-pointer">
+          <div id="music_task_icon" class="w-7 h-7 rounded-lg flex items-center justify-center bg-purple-600" aria-hidden="true">&#9835;</div>
+        </div>
       </div>
 
       <div class="flex items-center">
-        <div class="flex items-center space-x-2 flex-col">
+        <div class="taskbar-clock" id="taskbar-clock">
           <div id="live-time" class="text-xs text-gray-300"></div>
           <div id="live-date" class="text-xs text-gray-300"></div>
         </div>
-        <div
-          class="h-4 w-3 border-r border-r-2 border-transparent hover:border-gray-400"
-        ></div>
+        <button type="button" id="show-desktop" aria-label="Show desktop" title="Show desktop: minimize all windows"></button>
       </div>
     </div>
 
-    <script type="module">
-      import { loadFolder } from "./js/loadWindow.js";
-      // Resume ---------------------------------------------------------------
-      const resume_icon = document.getElementById("resume_icon");
-      const resume_container = document.getElementById("resume_card");
-      const resume_task_icon = document.getElementById("resume_task_icon");
-      // Project ---------------------------------------------------------------
-      const project_icon = document.getElementById("project_icon");
-      const project_container = document.getElementById("project_card");
-      const project_task_icon = document.getElementById("project_task_icon");
-      // Contact ---------------------------------------------------------------
-      const contact_icon = document.getElementById("contact_icon");
-      const contact_container = document.getElementById("contact_card");
-      const contact_task_icon = document.getElementById("contact_task_icon");
-      // Browser ---------------------------------------------------------------
-      const browser_task_icon = document.getElementById("browser_task_icon");
-      const browser_container = document.getElementById("browser_card");
-      // About Me ---------------------------------------------------------------
-      const about_icon = document.getElementById("about_icon");
-      const about_container = document.getElementById("about_card");
-      const about_task_icon = document.getElementById("about_task_icon");
-      // Menu ---------------------------------------------------------------
-      const menu_task_icon = document.getElementById("menu_task_icon");
-      const menu_container = document.getElementById("menu_bar");
-      // Form ---------------------------------------------------------------
-      const form_task_icon = document.getElementById("form_task_icon");
-      const form_container = document.getElementById("form_card");
+    <script type="module" src="./js/desktop.js"></script>
 
-      resume_icon.addEventListener("dblclick", () =>
-        loadFolder({
-          container: resume_container,
-          url: "./folders/resume.html",
-          toggle: true,
-          taskIcon: {
-            exist: false,
-            element: resume_task_icon,
-          },
-        }),
-      );
-      resume_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: resume_container,
-          url: "./folders/resume.html",
-          toggle: true,
-          taskIcon: {
-            exist: true,
-            element: resume_task_icon,
-          },
-        }),
-      );
-
-      // Project ---------------------------------------------------------------
-      project_icon.addEventListener("dblclick", () =>
-        loadFolder({
-          container: project_container,
-          url: "./folders/project.html",
-          taskIcon: {
-            exist: true,
-            element: project_task_icon,
-          },
-        }),
-      );
-      project_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: project_container,
-          url: "./folders/project.html",
-          toggle: true,
-          taskIcon: {
-            exist: true,
-            element: project_task_icon,
-          },
-        }),
-      );
-      // Contact ---------------------------------------------------------------
-      contact_icon.addEventListener("click", () =>
-        loadFolder({
-          container: contact_container,
-          url: "./folders/contact.html",
-          toggle: true,
-          taskIcon: {
-            exist: false,
-            element: document.getElementById("contact_task_icon"),
-          },
-        }),
-      );
-      contact_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: contact_container,
-          url: "./folders/contact.html",
-          toggle: true,
-          taskIcon: {
-            exist: true,
-            element: document.getElementById("contact_task_icon"),
-          },
-        }),
-      );
-      // Browser ---------------------------------------------------------------
-      browser_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: browser_container,
-          url: "./folders/browser.html",
-          taskIcon: {
-            exist: true,
-            element: browser_task_icon,
-          },
-          toggle: true,
-        }),
-      );
-      // About Me ---------------------------------------------------------------
-      about_icon.addEventListener("dblclick", () =>
-        loadFolder({
-          container: about_container,
-          url: "./folders/aboutMe.html",
-          toggle: true,
-          noTaskIcon: true,
-          taskIcon: {
-            exist: false,
-            element: document.getElementById("about_task_icon"),
-          },
-        }),
-      );
-      about_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: about_container,
-          url: "./folders/aboutMe.html",
-          toggle: true,
-          noTaskIcon: true,
-          taskIcon: {
-            exist: true,
-            element: document.getElementById("about_task_icon"),
-          },
-        }),
-      );
-      // Form ---------------------------------------------------------------
-      form_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: form_container,
-          url: "./folders/form.html",
-          taskIcon: {
-            exist: true,
-            element: form_task_icon,
-          },
-          toggle: true,
-        }),
-      );
-      // Menu ---------------------------------------------------------------
-      menu_task_icon.addEventListener("click", () =>
-        loadFolder({
-          container: menu_container,
-          url: "./folders/menu.html",
-          taskIcon: {
-            exist: true,
-            element: menu_task_icon,
-          },
-          toggle: true,
-        }),
-      );
-    </script>
-
-    <script type="module" src="./js/windows/contactWindow.js"></script>
-    <script type="module" src="./js/windows/resumeWindow.js"></script>
-    <script type="module" src="./js/windows/browserWindow.js"></script>
-    <script type="module" src="./js/windows/formWindow.js"></script>
-    <script type="module" src="./js/windows/projectWindow.js"></script>
-    <script type="module" src="./js/windows/aboutWindow.js"></script>
 
     <script src="./js/clock.js"></script>
   </body>

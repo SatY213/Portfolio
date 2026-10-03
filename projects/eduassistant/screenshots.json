@@ -1,0 +1,30 @@
+[
+  {
+    "file": "login.png",
+    "caption": "EduAssistant login interface"
+  },
+  {
+    "file": "subjects.png",
+    "caption": "Subject management dashboard"
+  },
+  {
+    "file": "chapters.png",
+    "caption": "Chapter management interface"
+  },
+  {
+    "file": "folders.png",
+    "caption": "Exercise and course folder organization"
+  },
+  {
+    "file": "editor.png",
+    "caption": "Rich text editor with document preview"
+  },
+  {
+    "file": "table-generator.png",
+    "caption": "Table generator for structured academic content"
+  },
+  {
+    "file": "graph-assistant.png",
+    "caption": "Graph assistant for drawing mathematical diagrams"
+  }
+]

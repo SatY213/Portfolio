@@ -1,0 +1,35 @@
+<div class="window bg-gray-800 shadow-2xl">
+  <div class="window-header flex justify-between items-center p-3 bg-gray-700">
+    <div class="flex items-center space-x-2"><span class="text-purple-300" aria-hidden="true">&#9835;</span><span class="text-white text-sm">Music Player</span></div>
+    <div class="flex space-x-2">
+      <div id="minimize_btn_music" role="button" tabindex="0" aria-label="Minimize window" class="cursor-pointer flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"><span aria-hidden="true">&minus;</span></div>
+      <div id="maximize_btn_music" role="button" tabindex="0" aria-label="Maximize window" class="cursor-pointer flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"><span aria-hidden="true">&#9633;</span></div>
+      <div id="close_btn_music" role="button" tabindex="0" aria-label="Close window" class="cursor-pointer flex items-center justify-center hover:bg-red-500 rounded text-gray-300"><span aria-hidden="true">&times;</span></div>
+    </div>
+  </div>
+  <div class="window-content p-6 bg-gray-900 text-gray-200">
+    <div class="music-art" aria-hidden="true">&#9835;</div>
+    <h2 class="text-2xl font-semibold text-center text-white">Extra Extended Soundtrack</h2>
+    <p class="text-center text-gray-400 mt-2">Hans Zimmer</p>
+    <audio id="portfolio-audio" controls preload="metadata" aria-label="Extra Extended Soundtrack by Hans Zimmer">
+      <source src="./extra-extended-soundtrack-by-hans-zimmer.mp3" type="audio/mpeg" />
+      Your browser does not support audio playback.
+    </audio>
+    <p id="music-status" role="status" class="text-sm text-center text-gray-400 mt-4">Press Play to listen.</p>
+    <p class="text-sm text-center text-gray-400 mt-4">Minimize to keep listening while exploring. Close the player to pause.</p>
+    <a href="./extra-extended-soundtrack-by-hans-zimmer.mp3" class="block text-center text-blue-400 underline mt-4" target="_blank" rel="noopener noreferrer">Open audio file</a>
+  </div>
+</div>
+<script>
+const audio = document.getElementById('portfolio-audio');
+const status = document.getElementById('music-status');
+audio.addEventListener('play', () => { status.textContent = 'Now playing'; });
+audio.addEventListener('pause', () => { status.textContent = 'Paused'; });
+audio.addEventListener('ended', () => { status.textContent = 'Track finished. Press Play to listen again.'; });
+const showError = () => { status.textContent = 'Unable to play this track. Try opening the audio file below.'; };
+audio.addEventListener('error', showError);
+audio.querySelector('source').addEventListener('error', showError);
+if (document.getElementById('music_card').style.display === 'block') {
+  audio.play().catch(() => { if (!audio.error) status.textContent = 'Press Play to listen.'; });
+}
+</script>

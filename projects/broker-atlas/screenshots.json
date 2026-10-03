@@ -1,0 +1,18 @@
+[
+  {
+    "file": "people.png",
+    "caption": "People directory and qualification workspace"
+  },
+  {
+    "file": "analytics.png",
+    "caption": "Collection analytics and data quality overview"
+  },
+  {
+    "file": "exports.png",
+    "caption": "Data export management"
+  },
+  {
+    "file": "jobs.png",
+    "caption": "Background job and processing pipeline monitoring"
+  }
+]

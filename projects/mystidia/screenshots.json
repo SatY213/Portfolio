@@ -1,0 +1,42 @@
+[
+  {
+    "file": "landing.png",
+    "caption": "Mystidia landing page"
+  },
+  {
+    "file": "login.png",
+    "caption": "User login interface"
+  },
+  {
+    "file": "cours-organisation.png",
+    "caption": "Course organization by year, unit, module, and chapter"
+  },
+  {
+    "file": "modules.png",
+    "caption": "Medical modules overview"
+  },
+  {
+    "file": "pdf-viewer.png",
+    "caption": "Interactive PDF viewer with study tools and AI assistance"
+  },
+  {
+    "file": "backpack.png",
+    "caption": "Personal study backpack for saved files and resources"
+  },
+  {
+    "file": "folders.png",
+    "caption": "Saved folders and resource organization"
+  },
+  {
+    "file": "buy-sub.png",
+    "caption": "Subscription purchase and plan selection"
+  },
+  {
+    "file": "admin-dashboard.png",
+    "caption": "Admin dashboard for academic program management"
+  },
+  {
+    "file": "admin-dashboard2.png",
+    "caption": "Admin dashboard for glossary and content management"
+  }
+]

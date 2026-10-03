@@ -1,53 +1,20 @@
-export async function loadFolder({
-  container,
-  url,
-  taskIcon = null,
-  toggle = false,
-}) {
-  if (toggle) {
-    const isVisible = container.style.display === "block";
-    container.style.display = isVisible ? "none" : "block";
-    if (!taskIcon.exist) {
-      taskIcon.element.parentElement.style.display = "flex";
-      taskIcon.exist = true;
-    }
-    if (taskIcon.exist)
-      taskIcon.element.parentElement.style.background = isVisible
-        ? "transparent"
-        : "#ffffff33";
-    if (isVisible) return;
-  } else {
-    container.style.display = "block";
-  }
+const pending = new WeakMap();
 
-  // Load only once
-  if (container.innerHTML) {
-    updateTaskIcon(taskIcon.element);
-    return;
-  }
-
-  const response = await fetch(url);
-  const html = await response.text();
-  container.innerHTML = html;
-
-  executeScripts(container);
-  updateTaskIcon(taskIcon.element);
-}
-
-function executeScripts(container) {
-  container.querySelectorAll("script").forEach((oldScript) => {
-    const script = document.createElement("script");
-    if (oldScript.src) {
-      script.src = oldScript.src;
-    } else {
-      script.textContent = oldScript.textContent;
-    }
-    document.body.appendChild(script);
-  });
-}
-
-function updateTaskIcon(icon) {
-  if (!icon) return;
-  icon.parentElement.style.background = "#ffffff33";
-  icon.parentElement.classList.remove("short-border");
+export async function loadFolder({ container, url }) {
+  if (container.dataset.loaded) return;
+  if (pending.has(container)) return pending.get(container);
+  const loading = (async () => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Unable to load window (${response.status})`);
+    container.innerHTML = await response.text();
+    // Isolate each fragment's variables so closing and reopening cannot redeclare globals.
+    container.querySelectorAll('script').forEach((oldScript) => {
+      const script = document.createElement('script');
+      script.textContent = `(() => {\n${oldScript.textContent}\n})();`;
+      oldScript.replaceWith(script);
+    });
+    container.dataset.loaded = 'true';
+  })();
+  pending.set(container, loading);
+  try { await loading; } finally { pending.delete(container); }
 }

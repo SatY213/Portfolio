@@ -1,5 +1,5 @@
 
-    <style> 
+    <style>
       .contact-item {
         transition: all 0.3s ease;
         border-left: 3px solid transparent;
@@ -216,9 +216,9 @@
         margin-top: 10px;
       }
     </style>
-  </head>
-  <div class=" " >
-    <div class="resume_window_header flex justify-between items-center p-3 bg-gray-700 " id="resume_window_header">
+
+  <div class="window">
+    <div class="window-header resume_window_header flex justify-between items-center p-3 bg-gray-700 " id="resume_window_header">
     <div class="flex items-center space-x-2">
       <img src="./images/pdfIcon.png" alt="" style="width: 20px" />
       <span class="text-white text-sm">PDF Viewer - Resume</span>
@@ -227,31 +227,31 @@
       <!-- Minimize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="minimize_btn_resume"
+        id="minimize_btn_resume" role="button" tabindex="0" aria-label="Minimize window"
       >
-        <i class="fas fa-minus text-xs"></i>
+        <span aria-hidden="true">&minus;</span>
       </div>
 
       <!-- Maximize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="maximize_btn_resume"
+        id="maximize_btn_resume" role="button" tabindex="0" aria-label="Maximize window"
       >
-        <i class="far fa-square text-xs"></i>
+        <span aria-hidden="true">&#9633;</span>
       </div>
 
       <!-- Close -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
-        id="close_btn_resume"
+        id="close_btn_resume" role="button" tabindex="0" aria-label="Close window"
       >
-        <i class="fas fa-times text-xs"></i>
+        <span aria-hidden="true">&times;</span>
       </div>
     </div>
   </div>
 
       <!-- PDF Container -->
-      <div class="pdf-container">
+      <div class="pdf-container window-content">
         <div class="pdf-toolbar">
           <button class="toolbar-btn" id="prev_page">
             <i class="fas fa-chevron-left"></i>
@@ -281,135 +281,70 @@
       </div>
 </div>
 <script>
-  const pdfUrl = "./images/resume.pdf";
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-// PDF state variables
-let pdfDoc = null;
-let currentPage = 1;
-let currentScale = 1.0;
-
-// DOM Elements
-const pagesContainer = document.getElementById("pdf_pages");
-const zoomValue = document.getElementById("zoom_value");
-const prevPageBtn = document.getElementById("prev_page");
-const nextPageBtn = document.getElementById("next_page");
-const zoomInBtn = document.getElementById("zoom_in");
-const zoomOutBtn = document.getElementById("zoom_out");
-
-// Load PDF document
-pdfjsLib
-  .getDocument(pdfUrl)
-  .promise.then((pdf) => {
-    pdfDoc = pdf;
-    renderPage(currentPage);
-    updatePageControls();
-  })
-  .catch((error) => {
-    console.error("Error loading PDF:", error);
-    pagesContainer.innerHTML = `
-                <div class="loading">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 40px; color: #e53e3e;"></i>
-                    <p>Failed to load PDF document</p>
-                    <p style="font-size: 14px; margin-top: 10px;">${error.message}</p>
-                </div>
-            `;
-  });
-
-// Render a single page
-function renderPage(pageNum) {
-  pagesContainer.innerHTML =
-    '<div class="loading"><div class="spinner"></div><p>Rendering page...</p></div>';
-
-  pdfDoc.getPage(pageNum).then((page) => {
-    const viewport = page.getViewport({ scale: currentScale });
-
-    // Create page wrapper
-    const pageDiv = document.createElement("div");
-    pageDiv.className = "pdf-page";
-    pageDiv.style.width = viewport.width + "px";
-    pageDiv.style.height = viewport.height + "px";
-
-    // Create canvas
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    // Append canvas to page wrapper
-    pageDiv.appendChild(canvas);
-
-    // Clear container and add page
-    pagesContainer.innerHTML = "";
-    pagesContainer.appendChild(pageDiv);
-
-    // Add page info
-    const pageInfo = document.createElement("div");
-    pageInfo.className = "page-info";
-    pageInfo.textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
-    pagesContainer.appendChild(pageInfo);
-
-    // Render PDF page
-    page.render({
-      canvasContext: ctx,
-      viewport: viewport,
-    });
-
-    // Create text layer for selectable text
-    page.getTextContent().then((textContent) => {
-      const textLayerDiv = document.createElement("div");
-      textLayerDiv.className = "textLayer";
-      pageDiv.appendChild(textLayerDiv);
-
-      pdfjsLib.renderTextLayer({
-        textContent: textContent,
-        container: textLayerDiv,
-        viewport: viewport,
-        textDivs: [],
-      });
-    });
-  });
+const pages = document.getElementById('pdf_pages');
+const zoom = document.getElementById('zoom_value');
+const prev = document.getElementById('prev_page');
+const next = document.getElementById('next_page');
+const zoomIn = document.getElementById('zoom_in');
+const zoomOut = document.getElementById('zoom_out');
+zoomIn.setAttribute('aria-label', 'Zoom in');
+zoomOut.setAttribute('aria-label', 'Zoom out');
+const controls = [prev, next, zoomIn, zoomOut];
+controls.forEach(button => button.disabled = true);
+let pdf, pageNumber = 1, scale = 1, revision = 0, resizeTimer;
+let fitted = true;
+function showError() {
+  pages.innerHTML = '<p>Unable to display the resume.</p><a href="./images/resume.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-400 underline">Open or download the PDF</a>';
 }
-
-// Update page navigation controls
-function updatePageControls() {
-  prevPageBtn.disabled = currentPage <= 1;
-  nextPageBtn.disabled = currentPage >= pdfDoc.numPages;
+async function render() {
+  if (!pdf || !pages.clientWidth) return;
+  const request = ++revision;
+  try {
+    const page = await pdf.getPage(pageNumber);
+    if (request !== revision || !pages.clientWidth) return;
+    if (fitted) scale = Math.min(1, Math.max(0.1, (pages.clientWidth - 24) / page.getViewport({ scale: 1 }).width));
+    const viewport = page.getViewport({ scale });
+    const ratio = window.devicePixelRatio || 1;
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.floor(viewport.width * ratio);
+    canvas.height = Math.floor(viewport.height * ratio);
+    canvas.style.width = `${viewport.width}px`;
+    canvas.style.height = `${viewport.height}px`;
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', `Resume, page ${pageNumber}`);
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport, transform: [ratio, 0, 0, ratio, 0, 0] }).promise;
+    if (request !== revision || !pages.clientWidth) return;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'pdf-page';
+    wrapper.append(canvas);
+    const info = document.createElement('a');
+    info.className = 'page-info text-blue-400 underline';
+    info.href = './images/resume.pdf'; info.target = '_blank'; info.rel = 'noopener noreferrer';
+    info.textContent = `Page ${pageNumber} of ${pdf.numPages} - Open original PDF`;
+    pages.replaceChildren(wrapper, info);
+    zoom.textContent = `${Math.round(scale * 100)}%`;
+    prev.disabled = pageNumber <= 1;
+    next.disabled = pageNumber >= pdf.numPages;
+    zoomIn.disabled = scale >= 3;
+    zoomOut.disabled = scale <= 0.2;
+  } catch { if (request === revision) showError(); }
 }
-
-// Zoom controls
-zoomInBtn.addEventListener("click", () => {
-  currentScale = Math.min(currentScale + 0.1, 3.0);
-  zoomValue.textContent = Math.round(currentScale * 100) + "%";
-  renderPage(currentPage);
-});
-
-zoomOutBtn.addEventListener("click", () => {
-  currentScale = Math.max(currentScale - 0.1, 0.5);
-  zoomValue.textContent = Math.round(currentScale * 100) + "%";
-  renderPage(currentPage);
-});
-
-// Page navigation
-prevPageBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderPage(currentPage);
-    updatePageControls();
-  }
-});
-
-nextPageBtn.addEventListener("click", () => {
-  if (currentPage < pdfDoc.numPages) {
-    currentPage++;
-    renderPage(currentPage);
-    updatePageControls();
-  }
-});
-
-// Initial zoom value
-zoomValue.textContent = Math.round(currentScale * 100) + "%";
-
+prev.addEventListener('click', () => { if (pageNumber > 1) { pageNumber--; render(); } });
+next.addEventListener('click', () => { if (pdf && pageNumber < pdf.numPages) { pageNumber++; render(); } });
+zoomIn.addEventListener('click', () => { fitted = false; scale = Math.min(3, scale + 0.1); render(); });
+zoomOut.addEventListener('click', () => { fitted = false; scale = Math.max(0.2, scale - 0.1); render(); });
+let lastWidth = 0;
+new ResizeObserver(() => {
+  if (pages.clientWidth === lastWidth) return;
+  lastWidth = pages.clientWidth;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(render, 100);
+}).observe(pages);
+(async () => {
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    pdf = await pdfjsLib.getDocument('./images/resume.pdf').promise;
+    await render();
+  } catch { showError(); }
+})();
 </script>
-  </div>

@@ -48,7 +48,7 @@
   class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
 >
   <!-- Title bar -->
-  <div class="flex justify-between items-center p-3 bg-gray-700">
+  <div class="window-header flex justify-between items-center p-3 bg-gray-700">
     <div class="flex items-center space-x-2">
       <div class="w-5 h-5 flex items-center justify-center">
         <i class="fas fa-envelope text-green-400 text-xs"></i>
@@ -59,32 +59,32 @@
       <!-- Minimize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="minimize_btn_form"
+        id="minimize_btn_form" role="button" tabindex="0" aria-label="Minimize window"
       >
-        <i class="fas fa-minus text-xs"></i>
+        <span aria-hidden="true">&minus;</span>
       </div>
 
       <!-- Maximize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="maximize_btn_form"
+        id="maximize_btn_form" role="button" tabindex="0" aria-label="Maximize window"
       >
-        <i class="far fa-square text-xs"></i>
+        <span aria-hidden="true">&#9633;</span>
       </div>
 
       <!-- Close -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
-        id="close_btn_form"
+        id="close_btn_form" role="button" tabindex="0" aria-label="Close window"
       >
-        <i class="fas fa-times text-xs"></i>
+        <span aria-hidden="true">&times;</span>
       </div>
     </div>
   </div>
 
   <!-- Content area -->
   <div
-    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+    class="window-content p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
   >
     <h2
       class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-2 flex items-center"
@@ -98,10 +98,10 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Name -->
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-2">
             <i class="fas fa-user mr-2 text-blue-400"></i>Full Name
           </label>
-          <input
+          <input id="contact-name" name="name"
             type="text"
             class="w-full form-input"
             placeholder="Enter your full name"
@@ -111,10 +111,10 @@
 
         <!-- Email -->
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2">
+          <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-2">
             <i class="fas fa-envelope mr-2 text-red-400"></i>Email Address
           </label>
-          <input
+          <input id="contact-email" name="email"
             type="email"
             class="w-full form-input"
             placeholder="your.email@example.com"
@@ -125,10 +125,10 @@
 
       <!-- Subject -->
       <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
+        <label for="contact-subject" class="block text-sm font-medium text-gray-300 mb-2">
           <i class="fas fa-tag mr-2 text-green-400"></i>Subject
         </label>
-        <input
+        <input id="contact-subject" name="subject"
           type="text"
           class="w-full form-input"
           placeholder="What is this regarding?"
@@ -138,22 +138,23 @@
 
       <!-- Message -->
       <div>
-        <label class="block text-sm font-medium text-gray-300 mb-2">
+        <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-2">
           <i class="fas fa-comment mr-2 text-yellow-400"></i>Message
         </label>
-        <textarea
+        <textarea id="contact-message" name="message"
           class="w-full form-input h-32 resize-none"
           placeholder="Type your message here..."
           required
         ></textarea>
       </div>
 
+      <p class="text-sm text-gray-400">This opens your email app with a draft. Send the message there to contact me.</p>
       <!-- Submit Button -->
       <div class="flex justify-center pt-4 border-t border-gray-700">
-        <button
+        <button type="submit"
           class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded flex items-center"
         >
-          <i class="fas fa-paper-plane mr-2"></i> Send Message
+          <i class="fas fa-paper-plane mr-2"></i> Open Email App
         </button>
       </div>
     </form>
@@ -161,33 +162,10 @@
 </div>
 
 <script>
-  document
-    .getElementById("contactForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // Get form data
-      const formData = new FormData(this);
-      const name = this.querySelector('input[type="text"]').value;
-      const email = this.querySelector('input[type="email"]').value;
-      const subject = this.querySelectorAll('input[type="text"]')[1].value;
-      const message = this.querySelector("textarea").value;
-
-      // Simulate form submission
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-
-      submitBtn.innerHTML =
-        '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        alert(
-          `Thank you, ${name}! Your message has been sent successfully.\n\nWe'll get back to you at ${email} soon.`,
-        );
-        this.reset();
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }, 2000);
-    });
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const fields = new FormData(this);
+  const body = `${fields.get("message")}\n\nFrom: ${fields.get("name")}\nEmail: ${fields.get("email")}`;
+  window.location.href = `mailto:abdelhakimerini@gmail.com?subject=${encodeURIComponent(fields.get("subject"))}&body=${encodeURIComponent(body)}`;
+});
 </script>

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "home.png",
+    "caption": "Main dashboard and quick access to business operations"
+  },
+  {
+    "file": "pos.png",
+    "caption": "Point-of-sale interface for processing customer transactions"
+  },
+  {
+    "file": "sales.png",
+    "caption": "Sales management and transaction processing"
+  },
+  {
+    "file": "transactions.png",
+    "caption": "Transaction history and business activity tracking"
+  },
+  {
+    "file": "stock.png",
+    "caption": "Product inventory and stock management"
+  },
+  {
+    "file": "reports.png",
+    "caption": "Business reports and performance analytics"
+  },
+  {
+    "file": "settings.png",
+    "caption": "Application and business configuration"
+  }
+]

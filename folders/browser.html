@@ -132,7 +132,7 @@
   class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
 >
   <!-- Title bar -->
-  <div class="flex justify-between items-center p-3 bg-gray-700">
+  <div class="window-header flex justify-between items-center p-3 bg-gray-700">
     <div class="flex items-center space-x-2">
       <div
         class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center"
@@ -145,31 +145,31 @@
       <!-- Minimize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="minimize_btn_browser"
+        id="minimize_btn_browser" role="button" tabindex="0" aria-label="Minimize window"
       >
-        <i class="fas fa-minus text-xs"></i>
+        <span aria-hidden="true">&minus;</span>
       </div>
 
       <!-- Maximize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="maximize_btn_browser"
+        id="maximize_btn_browser" role="button" tabindex="0" aria-label="Maximize window"
       >
-        <i class="far fa-square text-xs"></i>
+        <span aria-hidden="true">&#9633;</span>
       </div>
 
       <!-- Close -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
-        id="close_btn_browser"
+        id="close_btn_browser" role="button" tabindex="0" aria-label="Close window"
       >
-        <i class="fas fa-times text-xs"></i>
+        <span aria-hidden="true">&times;</span>
       </div>
     </div>
   </div>
 
   <!-- Browser content -->
-  <div class="browser-content">
+  <div class="browser-content window-content">
     <!-- Browser toolbar -->
     <div class="browser-toolbar">
       <button class="nav-btn" id="back_btn" disabled>
@@ -198,11 +198,12 @@
       </button>
     </div>
 
+    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="p-2 text-sm text-blue-400">Open Google in a new tab</a>
     <!-- Browser frame -->
     <iframe
       src="https://www.google.com/webhp?igu=1"
       class="browser-frame h-screen max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
-      id="browser_frame"
+      id="browser_frame" title="Google browser"
       frameborder="0"
     ></iframe>
   </div>

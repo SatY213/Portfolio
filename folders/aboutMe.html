@@ -32,7 +32,7 @@
   class="w-full h-auto max-h-[calc(100vh_-_56px)] bg-gray-800 overflow-hidden shadow-2xl window"
 >
   <!-- Title bar -->
-  <div class="flex justify-between items-center p-3 bg-gray-700">
+  <div class="window-header flex justify-between items-center p-3 bg-gray-700">
     <div class="flex items-center space-x-2">
       <img src="./images/infoIcon.png" alt="" style="width: 20px" />
       <span class="text-white text-sm">About Me - Profile</span>
@@ -41,30 +41,30 @@
       <!-- Minimize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="minimize_btn_about"
+        id="minimize_btn_about" role="button" tabindex="0" aria-label="Minimize window"
       >
-        <i class="fas fa-minus text-xs"></i>
+        <span aria-hidden="true">&minus;</span>
       </div>
       <!-- Maximize -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-gray-600 rounded text-gray-300"
-        id="maximize_btn_about"
+        id="maximize_btn_about" role="button" tabindex="0" aria-label="Maximize window"
       >
-        <i class="far fa-square text-xs"></i>
+        <span aria-hidden="true">&#9633;</span>
       </div>
       <!-- Close -->
       <div
         class="cursor-pointer w-6 h-6 flex items-center justify-center hover:bg-red-500 rounded text-gray-300"
-        id="close_btn_about"
+        id="close_btn_about" role="button" tabindex="0" aria-label="Close window"
       >
-        <i class="fas fa-times text-xs"></i>
+        <span aria-hidden="true">&times;</span>
       </div>
     </div>
   </div>
 
   <!-- Content area -->
   <div
-    class="p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
+    class="window-content p-6 h-auto max-h-[calc(100vh_-_100px)] overflow-y-auto bg-gray-900 text-gray-200"
   >
     <!-- Header with profile summary -->
     <div class="mb-8">
@@ -364,30 +364,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  // Window controls
-  document.addEventListener("DOMContentLoaded", function () {
-    const minimizeBtn = document.getElementById("minimize_btn_about");
-    const maximizeBtn = document.getElementById("maximize_btn_about");
-    const closeBtn = document.getElementById("close_btn_about");
-
-    if (minimizeBtn) {
-      minimizeBtn.addEventListener("click", function () {
-        console.log("Minimize about window");
-      });
-    }
-
-    if (maximizeBtn) {
-      maximizeBtn.addEventListener("click", function () {
-        console.log("Maximize about window");
-      });
-    }
-
-    if (closeBtn) {
-      closeBtn.addEventListener("click", function () {
-        console.log("Close about window");
-      });
-    }
-  });
-</script>

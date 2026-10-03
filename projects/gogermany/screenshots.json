@@ -1,0 +1,22 @@
+[
+  {
+    "file": "clients.png",
+    "caption": "Client management"
+  },
+  {
+    "file": "services.png",
+    "caption": "Training services management"
+  },
+  {
+    "file": "groups.png",
+    "caption": "Group management"
+  },
+  {
+    "file": "finance.png",
+    "caption": "Financial dashboard"
+  },
+  {
+    "file": "settings.png",
+    "caption": "Application settings"
+  }
+]
